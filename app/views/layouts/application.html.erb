@@ -13,7 +13,10 @@
     <%= render "layouts/header" %>
     <div class="main-container container">
       <% flash.each do |message_type, message| %>
-        <div class="<%= flash_class(message_type) %>"><%= message %></div>
+      <div class="<%= flash_class(message_type) %>"><%= message %></div>
+<!-- =======
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+>>>>>>> Add home page -->
       <% end %>
       <%= yield %>
       <%= render "layouts/footer" %>

@@ -1,6 +1,6 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
-  <div class="row center">
+  <div class="center">
     <%= link_to "Play Game", game_path, class: "btn btn-lg btn-primary"%>
   </div>
 <% else %>
