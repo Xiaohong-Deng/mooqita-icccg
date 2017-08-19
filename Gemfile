@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '3.3.7'
 gem 'devise'
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
