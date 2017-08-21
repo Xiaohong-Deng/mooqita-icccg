@@ -16,7 +16,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-// @import "static_pages";
+@import "static_pages";
 
 header h1{
   position: relative;
@@ -30,4 +30,8 @@ header h1{
 
 form {
   max-width: 500px;
+}
+
+body {
+  padding-top: 60px;
 }
