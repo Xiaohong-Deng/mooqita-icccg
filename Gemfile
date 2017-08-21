@@ -32,6 +32,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '3.3.7'
+gem 'devise'
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -42,6 +45,10 @@ group :development, :test do
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
 end
 
 group :development do

@@ -1,5 +1,7 @@
 <% provide(:title, "Home") %>
-<% if logged_in? %>
+
+<% if user_signed_in? %>
+>>>>>>> 0a5198090eb536bfeb9846dc3820a372083c7b74
   <div class="row">
   </div>
 <% else %>
@@ -9,6 +11,6 @@
       Welcome to Iterative Crowdsourcing Comprehension Challenge Game!
     </h2>
 
-    <%= link_to "Sign up now!", "#", class: "btn btn-lg btn-primary" %>
+    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
