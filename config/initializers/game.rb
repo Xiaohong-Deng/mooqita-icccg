@@ -1,0 +1,1 @@
+GAME_SIZE = 3
