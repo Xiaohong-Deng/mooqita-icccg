@@ -8,6 +8,16 @@ class Game < ApplicationRecord
     players.count
   end
 
+  def self.remove(player)
+    game = player.game
+
+    if game.number_of_players == 1
+      game.destroy
+    else
+      player.destroy
+    end
+  end
+
   def self.add_or_new(user)
     game = waiting_game(user) || Game.new
 
