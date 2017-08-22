@@ -6,6 +6,7 @@ class GamesController < ApplicationController
 
     if game.save
       redirect_to game
+      # ActionCable.server.broadcast "game_#{game_id}"
     else
       flash[:danger] = 'something went wrong...'
       redirect_to root_path
@@ -13,7 +14,9 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = current_player.game
+    @game = current_player&.game
+    return redirect_to root_path unless @game
+    render 'show'
   end
 
   private

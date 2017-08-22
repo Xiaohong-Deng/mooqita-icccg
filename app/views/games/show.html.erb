@@ -1,4 +1,7 @@
-<div class="game">
+<div id="game" game-id="<%= @game.id %>">
+  <% if @game.active? %>
+  <%= render('starting')%>
+  <% else %>
   <div class="status">
     There are currently <%= @game.number_of_players %> players waiting.
   </div>
@@ -6,3 +9,22 @@
   <button type="button" name="button">Invite players</button>
   <button type="button" name="button">Leave</button>
 </div>
+<% end %>
+<script type="text/javascript">
+  (function() {
+  App.room = App.cable.subscriptions.create({
+    channel: "GameChannel",
+    id: <%= @game.id %>
+  }, {
+    received: function(data) {
+      if (data['status'] === 'active') {
+        $('#game').html(data['data']);
+      } else {
+        return $('.status').html(data['number_of_players']);
+      }
+
+    }
+  });
+
+  }).call(this);
+</script>
