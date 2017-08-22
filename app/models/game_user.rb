@@ -17,9 +17,6 @@ class GameUser < ApplicationRecord
   private
 
   def update_game_status!
-    if game.number_of_players == 3
-      game.active!
-
-    end
+    game.active! if game.number_of_players == GAME_SIZE
   end
 end
