@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  resources :games, only: [:create, :show]
+  get '/game', to: 'games#game'
 
   mount ActionCable.server => '/cable'
 end
