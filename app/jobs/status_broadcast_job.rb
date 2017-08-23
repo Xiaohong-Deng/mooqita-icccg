@@ -2,6 +2,12 @@ class StatusBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(game)
-    ActionCable.server.broadcast "game_#{game.id}", number_of_players: game.number_of_players, status: game.status
+    GameChannel.broadcast_to(game, data_for(game))
+  end
+
+  private
+
+  def data_for game
+    {target: '.status span', template: game.number_of_players}
   end
 end
