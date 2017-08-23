@@ -1,0 +1,12 @@
+<div class="game">
+  <script type="text/javascript">
+    $(document).on('turbolinks:load', function () {
+      var spinner = new Spinner().spin();
+      $('.game').html(spinner.el);
+
+      $('body').attr("data-turbolinks", "false");
+
+      startGameCable();
+    })
+  </script>
+</div>

@@ -1,16 +1,16 @@
 class InitialPlayerBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(game, user)
-    channel = "game_player_#{user.id}"
-    ActionCable.server.broadcast channel, data_for(game)
+  def perform(player)
+    GameChannel.broadcast_to player, data_for(player)
   end
 
   private
 
-  def data_for(game)
+  def data_for(player)
+    game = player.game
     template = game.waiting? ? 'waiting' : 'starting'
     template = GamesController.render(partial: "games/#{template}", locals: {game: game})
-    {target: '.main-container', template: template}
+    {target: '.game', template: template}
   end
 end

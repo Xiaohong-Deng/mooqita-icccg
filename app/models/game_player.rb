@@ -6,22 +6,19 @@ class GamePlayer < ApplicationRecord
   after_destroy
 
   def self.add(user)
-    game = waiting_game(user) || Game.create
+    player = find_by(user: user)
+    return player if player
 
+    game = Game.waiting.first || Game.create
     self.create(game: game, user: user)
   end
 
   def self.remove(player)
-    if game.players.one?
-      game.destroy
+    if player.game.players.one?
+      player.game.destroy
     else
-      self.destroy
+      player.destroy
     end
-  end
-
-  def self.waiting_game(user)
-    Game.joins(:game_players).
-      where("(status = ? AND game_players.user_id = ?) or (status = ?)", 0, user.id, 0).first
   end
 
   private
