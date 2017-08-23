@@ -12,10 +12,6 @@ module ApplicationHelper
     !current_user.nil?
   end
 
-  def current_user
-    nil
-  end
-
   def flash_class(level)
     case level
     when 'notice' then "alert alert-success"
