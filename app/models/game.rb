@@ -8,13 +8,11 @@ class Game < ApplicationRecord
     players.count
   end
 
-  def self.remove(player)
-    game = player.game
-
+  def self.remove(game, user)
     if game.number_of_players == 1
       game.destroy
     else
-      player.destroy
+      GameUser.find_by(user: user)&.destroy
     end
   end
 
@@ -22,6 +20,7 @@ class Game < ApplicationRecord
     game = waiting_game(user) || Game.new
 
     game.game_players.new(user_id: user.id)
+    game.save
     game
   end
 

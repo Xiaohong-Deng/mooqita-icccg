@@ -1,15 +1,14 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "game_#{params[:id]}"
+    @game = Game.add_or_new(current_user)
+    stream_for @game
+    stream_from "game_player_#{current_user.id}"
+    InitialPlayerBroadcastJob.perform_later(@game, current_user)
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
-    player = GameUser.find_by(user: current_user)
-    Game.remove(player)
-  end
-
-  def status
-    ActionCable.server.broadcast 'game_channel', data: 'hello'
+    Game.remove(@game, current_user)
+    StatusBroadcastJob.perform_now(@game)
   end
 end
