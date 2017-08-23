@@ -1,13 +1,7 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
-<<<<<<< HEAD
   <div class="center">
     <%= link_to "Play Game", game_path, class: "btn btn-lg btn-primary"%>
-=======
-  <div class="row">
-  <div class="row center">
-    <a href="#" id="start-game" data-turbolinks="false" class="btn btn-lg btn-primary">Play Game</a>
->>>>>>> refactor to only use channel
   </div>
 <% else %>
   <div class="center jumbotron">
