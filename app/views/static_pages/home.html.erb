@@ -1,7 +1,7 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
   <div class="row center">
-    <%= link_to "Play Game", games_path, class: "btn btn-lg btn-primary", method: :post, remote: true %>
+    <a href="#" id="start-game" data-turbolinks="false" class="btn btn-lg btn-primary">Play Game</a>
   </div>
 <% else %>
   <div class="center jumbotron">

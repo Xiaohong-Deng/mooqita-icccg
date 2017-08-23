@@ -5,14 +5,13 @@ class GameUser < ApplicationRecord
   after_create_commit do
     update_game_status!
 
-    if game.active?
+    case
+    when game.active?
       GameStartingBroadcastJob.perform_now(game)
-    else
+    when game.waiting?
       StatusBroadcastJob.perform_now(game)
     end
   end
-
-  after_destroy_commit { StatusBroadcastJob.perform_now(game) }
 
   private
 
