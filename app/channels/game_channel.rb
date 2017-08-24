@@ -1,24 +1,28 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    @player = GamePlayer.add(current_user)
-    stream_for @player
-    stream_for @player.game
+    add_user_to_game
 
-    InitialPlayerBroadcastJob.perform_later(@player)
-    ParticipantsBroadcastJob.perform_now(@player.game)
+    stream_for current_user
+    stream_for current_user.game
+
+    InitialPlayerBroadcastJob.perform_later(current_user)
+    ParticipantsBroadcastJob.perform_now(current_user.game)
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
-    if !user_has_other_connections?(current_user) && @player.game.waiting?
-      GamePlayer.remove(@player)
-      ParticipantsBroadcastJob.perform_now(@player.game)
+    if !user_has_other_connections? && current_user.game.waiting?
+      GamePlayer.remove(current_user)
+      ParticipantsBroadcastJob.perform_now(current_user.game)
     end
   end
 
   private
 
-  def user_has_other_connections?(user)
-    connection.server.connections.map(&:current_user).include?(user)
+  def add_user_to_game
+    connection.current_user = GamePlayer.add(current_user)
+  end
+
+  def user_has_other_connections?
+    connection.server.connections.map(&:current_user).include?(current_user)
   end
 end
