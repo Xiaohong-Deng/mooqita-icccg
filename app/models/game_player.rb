@@ -7,7 +7,7 @@ class GamePlayer < ApplicationRecord
 
   def self.add(user)
     player = find_by(user: user)
-    return player if player
+    return player if player && player.game.waiting?
 
     game = Game.waiting.first || Game.create
     self.create(game: game, user: user)
