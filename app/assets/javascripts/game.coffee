@@ -1,4 +1,3 @@
-# ActionCable
 window.startGameCable = ->
   App.game = App.cable.subscriptions.create "GameChannel",
     received: (data) ->
