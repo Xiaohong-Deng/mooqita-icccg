@@ -1,3 +1,14 @@
 <div >
-  We have <%= GAME_SIZE %> players. game is starting....
+  We have <%= GAME_SIZE %> players. redirecting to game....
+
+  <script type="text/javascript">
+  $(document).ready(function () {
+    var spinner = new Spinner().spin();
+    $('.game').append(spinner.el);
+
+    setTimeout(function() {
+      window.location.replace("/games/<%= game_id %>")
+    }, 3000);
+  })
+  </script>
 </div>
