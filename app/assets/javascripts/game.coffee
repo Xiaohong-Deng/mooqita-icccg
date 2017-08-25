@@ -1,5 +1,5 @@
-window.startGameCable = ->
-  App.game = App.cable.subscriptions.create "GameChannel",
+window.startGameWaitingRoomCable = ->
+  App.game = App.cable.subscriptions.create "GameWaitingRoomChannel",
     received: (data) ->
       @renderTemplate(data)
     renderTemplate: (data) ->

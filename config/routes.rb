@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  get '/game', to: 'games#game'
+  get '/games/waiting-room', to: 'games#waiting_room'
 
   mount ActionCable.server => '/cable'
 end
