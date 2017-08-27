@@ -1,4 +1,6 @@
 class CurrentUserBroadcastJob < ApplicationJob
+  include Templatable
+  
   queue_as :default
 
   def perform(user, game)
@@ -8,18 +10,6 @@ class CurrentUserBroadcastJob < ApplicationJob
   private
 
   def data_for(game)
-    template = GamesController.render(template(game))
-    {target: '.game', template: template}
-  end
-
-  def template(game)
-    if game
-      {partial: "games/starting", locals: {game_id: game.id}}
-    else
-      {
-        partial: "games/waiting",
-        locals: {participants_size: GameWaitingRoom.participants_size}
-      }
-    end
+    game ? game_starting(game) : game_waiting
   end
 end
