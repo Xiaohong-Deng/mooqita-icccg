@@ -50,6 +50,7 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
