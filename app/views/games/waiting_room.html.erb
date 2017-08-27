@@ -1,10 +1,10 @@
-<div class="game">
-  <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
       var spinner = new Spinner().spin();
-      $('.game').html(spinner.el);
+      $('.main-container').html(spinner.el);
 
-      startGameWaitingRoomCable();
+      setTimeout(function() {
+        startGameWaitingRoomCable();
+      }, 700)
     })
   </script>
-</div>

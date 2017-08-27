@@ -23,10 +23,6 @@ class GameWaitingRoomChannel < ApplicationCable::Channel
     Game.create_with_users_ids(GameWaitingRoom.users_ids) if GameWaitingRoom.full?
   end
 
-  def add_user_to_game
-    connection.current_user = GamePlayer.add(current_user)
-  end
-
   def user_has_other_connections?
     connection.server.connections.map(&:current_user).include?(current_user)
   end

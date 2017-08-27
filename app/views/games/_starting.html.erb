@@ -4,7 +4,7 @@
   <script type="text/javascript">
   $(document).ready(function () {
     var spinner = new Spinner().spin();
-    $('.game').append(spinner.el);
+    $('.main-container').append(spinner.el);
 
     setTimeout(function() {
       window.location.replace("/games/<%= game_id %>")
