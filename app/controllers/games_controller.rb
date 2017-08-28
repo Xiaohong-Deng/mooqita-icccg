@@ -1,14 +1,13 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
-  def waiting_room
-  end
-
-  def show
-    @game = Game.find(params[:id])
-    authenticate_player!
-  end
+  before_action :set_game
+  before_action :authenticate_player!
 
   private
+
+  def set_game
+    @game = Game.find(params[:id])
+  end
 
   def authenticate_player!
     unless @game.players.include? current_user
