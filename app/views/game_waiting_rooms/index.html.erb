@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+      var spinner = new Spinner().spin();
+      $('.main-container').html(spinner.el);
+
+      setTimeout(function() {
+        startGameWaitingRoomCable();
+      }, 700)
+    })
+  </script>
