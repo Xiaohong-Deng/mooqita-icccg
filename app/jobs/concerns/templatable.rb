@@ -21,6 +21,6 @@ module Templatable
   end
 
   def render(name, locals)
-    GamesController.render(partial: "games/#{name}", locals: locals)
+    GameWaitingRoomsController.render(partial: "game_waiting_rooms/#{name}", locals: locals)
   end
 end
