@@ -3,11 +3,7 @@ class GameWaitingRoomChannel < ApplicationCable::Channel
     stream_for current_user
     stream_from 'waiting-room'
 
-    GameWaitingRoom.add(current_user)
-    game = create_game
-
-    CurrentUserBroadcastJob.perform_later(current_user, game)
-    ParticipantsBroadcastJob.perform_now(game)
+    add_current_user
   end
 
   def unsubscribed
@@ -19,8 +15,16 @@ class GameWaitingRoomChannel < ApplicationCable::Channel
 
   private
 
+  def add_current_user
+    GameWaitingRoom.add(current_user)
+    @game = create_game if GameWaitingRoom.full?
+
+    CurrentUserBroadcastJob.perform_later(current_user, @game)
+    ParticipantsBroadcastJob.perform_now(@game)
+  end
+
   def create_game
-    Game.create_with_users_ids(GameWaitingRoom.users_ids) if GameWaitingRoom.full?
+    Game.create_with_users_ids(GameWaitingRoom.users_ids)
   end
 
   def user_has_other_connections?

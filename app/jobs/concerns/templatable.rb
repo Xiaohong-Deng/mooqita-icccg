@@ -1,4 +1,7 @@
 module Templatable
+  def template
+
+  end
   def game_starting(game)
     {
       target: '.main-container',
