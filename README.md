@@ -16,7 +16,9 @@ virtual development environment based on Vagrant.
 3- When the machine is ready, run `vagrant ssh` to log into it.
 4- Move into the project directory with `cd /vagrant`.
 5- Install the project gems with `bundle install`.
-6- Build the database structure with `rails db:schema:load`.
+6- Install the required Node modules with `rake yarn:install`.
+7- Build the database structure with `rails db:schema:load`.
+8- Load seed data with `rails db:seed`.
 
 Now check that everything works with `rails s` and opening http://localhost:3000
 in your browser.
@@ -29,17 +31,23 @@ in your browser.
 
 ## Project Development
 
-The [gitflow][3] style is used on this repo, so follow the next steps to work on
-new features and fixes:
+The _trunk development_ style is used on this repo, so follow the next steps to
+work on new features and fixes:
 
 * If using the virtual development environment:
   - Start the project's box with 'vagrant up'.
   - Log into the box with `vagrant ssh`.
   - Move into the project directory with `cd /vagrant`.
-* Create a new branch from the _development_ branch.
+* Ensure dependencies are up to date:
+  - `bundle install`
+  - `rake yarn:install`
+* Run pending migrations and load seed data:
+  - `rails db:migrate`
+  - `rails db:seed`
+* Create a new branch from the **master** branch.
 * Try to work on atomic commits related to the feature.
 * Try to add TDD and/or BDD tests for your code.
-* On finish, send a push request targeting the _development_ branch for review.
+* On finish, send a push request targeting the **master** branch for review.
 
 
 ## Testing
@@ -51,4 +59,3 @@ the `rake spec` command.
 [0]: https://www.aaai.org/ojs/index.php/aimagazine/article/view/2649
 [1]: https://www.vagrantup.com/downloads.html
 [2]: https://www.virtualbox.org/wiki/Downloads
-[3]: https://datasift.github.io/gitflow/IntroducingGitFlow.html
