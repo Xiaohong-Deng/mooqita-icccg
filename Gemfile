@@ -35,6 +35,8 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'simple_form'
+# Use Webpack to manage app-like JavaScript modules in Rails with Yarn
+gem 'webpacker'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
