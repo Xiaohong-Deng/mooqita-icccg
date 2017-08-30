@@ -10,15 +10,15 @@ virtual development environment based on Vagrant.
 
 ### First Run Usage
 
-0- Install in your computer the software listed the requirements section.
-1- Clone the repository into your machine.
-2- Run `vagrant up` and wait for the machine to be built.
-3- When the machine is ready, run `vagrant ssh` to log into it.
-4- Move into the project directory with `cd /vagrant`.
-5- Install the project gems with `bundle install`.
-6- Install the required Node modules with `rake yarn:install`.
-7- Build the database structure with `rails db:schema:load`.
-8- Load seed data with `rails db:seed`.
+0. Install in your computer the software listed the requirements section.
+1. Clone the repository into your machine.
+2. Run `vagrant up` and wait for the machine to be built.
+3. When the machine is ready, run `vagrant ssh` to log into it.
+4. Move into the project directory with `cd /vagrant`.
+5. Install the project gems with `bundle install`.
+6. Install the required Node modules with `rake yarn:install`.
+7. Build the database structure with `rails db:schema:load`.
+8. Load seed data with `rails db:seed`.
 
 Now check that everything works with `rails s` and opening http://localhost:3000
 in your browser.
