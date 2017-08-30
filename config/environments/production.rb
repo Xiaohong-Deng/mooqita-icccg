@@ -43,7 +43,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   config.action_cable.url = "wss://iccg-team-green.herokuapp.com/cable"
   config.web_socket_server_url = "wss://iccg-team-green.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = ['https://iccg-team-green.herokuapp.com', 'http://iccg-team-green.herokuapp.com']
+  config.action_cable.allowed_request_origins = /http:\/\/iccg-team-green.herokuapp.com.*/
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
