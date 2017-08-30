@@ -1,7 +1,7 @@
 class GameWaitingRoom
   attr_reader :queue
 
-  def initialize(queue: Redis::Unique::Queue.new('game_waiting_room', Redis.new(url: ENV['REDISTOGO_URL'])))
+  def initialize(queue: Redis::Unique::Queue.new('game_waiting_room', Redis.new(url: ActionCable.server.config.cable[:url])))
     @queue = queue
   end
 
