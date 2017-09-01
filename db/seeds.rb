@@ -7,5 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 (1..4).each do |n|
-  User.create(email: "user#{n}@example.com", password: "topsecret")
+  User.create email: "user#{n}@example.com", password: "topsecret"
+end
+
+Dir.glob('db/documents/*.txt').each do |file_name|
+  lines = File.open(file_name, 'r').readlines
+  title = lines[0].chomp,
+  content = lines.slice(2, lines.length - 2).join.chomp
+
+  ## TODO
+  ## Uncomment and adjust when the document model is ready
+  # Document.create title: title, content: content
 end
