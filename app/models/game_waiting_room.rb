@@ -1,3 +1,4 @@
+# it's a non persistent model, no migration corresponding to it
 class GameWaitingRoom
   attr_reader :queue
 
@@ -26,10 +27,16 @@ class GameWaitingRoom
   end
 
   class << self
+    # instance methods that are not inherited from ancestors
     instance_methods = GameWaitingRoom.instance_methods(false)
+    # in this scope self is class GameWaitingRoom
+    # delegate here delegates all the self.instance_methods
+    # to self.room, e.g. GameWaitingRoom.participants_size is equal to
+    # GameWaitingRoom.room.participants_size
     delegate(*instance_methods, to: :room)
 
     def room
+      # again new is self.new, which is GameWaitingRoom.new
       @room ||= new
     end
   end
