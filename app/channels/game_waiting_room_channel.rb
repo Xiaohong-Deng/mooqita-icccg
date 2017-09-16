@@ -20,7 +20,6 @@ class GameWaitingRoomChannel < ApplicationCable::Channel
   def add_current_user
     GameWaitingRoom.add(current_user)
     @game = create_game if GameWaitingRoom.full?
-
     # don't see it's necessary to perform other players jobs first
     # might as well play current_user first
     CurrentUserBroadcastJob.perform_later(current_user, @game)
