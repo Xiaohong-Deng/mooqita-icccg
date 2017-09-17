@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902161416) do
+ActiveRecord::Schema.define(version: 20170917033319) do
 
   create_table "documents", force: :cascade do |t|
     t.string "title"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170902161416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
+    t.integer "score", default: 0
     t.index ["game_id"], name: "index_game_players_on_game_id"
     t.index ["user_id"], name: "index_game_players_on_user_id"
   end
