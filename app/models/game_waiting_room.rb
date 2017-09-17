@@ -29,10 +29,10 @@ class GameWaitingRoom
   class << self
     # instance methods that are not inherited from ancestors
     instance_methods = GameWaitingRoom.instance_methods(false)
-    # in this scope self is class GameWaitingRoom
-    # delegate here delegates all the self.instance_methods
-    # to self.room, e.g. GameWaitingRoom.participants_size is equal to
-    # GameWaitingRoom.room.participants_size
+    # by default 'delegate' delegates all the instance_methods
+    # to room. Both are considered instance methods in this scope
+    # In this scope, self for instance methods is class GameWaitingRoom
+    # self for self.method is singleton class for GameWaitingRoom
     delegate(*instance_methods, to: :room)
 
     def room

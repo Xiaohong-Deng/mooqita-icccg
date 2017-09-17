@@ -31,6 +31,8 @@ class GameWaitingRoomChannel < ApplicationCable::Channel
   end
 
   def user_has_other_connections?
+    # connection here is eq to ActionCable. wonder why and where the instance
+    # 'connection' is instantiated. delegation maybe?
     connection.server.connections.map(&:current_user).include?(current_user)
   end
 end
