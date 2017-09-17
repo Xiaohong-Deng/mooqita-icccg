@@ -13,7 +13,7 @@ RSpec.describe Game, type: :model do
         user1 = User.create(email: "user1@example.com", password: "topsecret")
         user2 = User.create(email: "user2@example.com", password: "topsecret")
 
-        game = Game.create_with_users_ids([1, 2])
+        game = Game.create_with_users_ids([user1.id, user2.id])
         expect(game.players.to_a).to include(user1, user2)
       end
     end
