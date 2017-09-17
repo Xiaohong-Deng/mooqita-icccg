@@ -6,9 +6,11 @@ class Game < ApplicationRecord
 
   def self.create_with_users_ids(ids)
     game = Game.create
+    roles_shuffled = GAME_ROLES.map(&:to_s).shuffle
 
-    ids.each do |id|
-      game.game_players.create(user_id: id)
+
+    ids.zip(roles_shuffled).each do |id, role|
+      game.game_players.create(user_id: id, role: role)
     end
 
     game
