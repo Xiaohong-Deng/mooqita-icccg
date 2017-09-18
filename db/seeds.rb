@@ -17,5 +17,5 @@ Dir.glob('db/documents/*.txt').each do |file_name|
 
   ## TODO
   ## Uncomment and adjust when the document model is ready
-  # Document.create title: title, content: content
+  Document.create title: title, content: content
 end
