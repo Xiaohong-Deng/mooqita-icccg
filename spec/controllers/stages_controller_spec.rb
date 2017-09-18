@@ -2,10 +2,9 @@
 
 # RSpec.describe StagesController, type: :controller do
 
-#   describe "GET #show" do
-#     it "returns http success" do
-#       get :show, game_id: 1, id: 1
-#       expect(response).to have_http_status(:success)
+#   context 'a user not in the game' do
+#     it 'should not be able to access pages in the gaming cycle' do
+
 #     end
 #   end
 
