@@ -5,9 +5,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get '/games/waiting-room', to: 'game_waiting_rooms#index'
-  resources :games, only: [] do
-    resources :stages, only: [:show]
-  end
+  resources :games, only: [:show, :update]
 
   mount ActionCable.server => '/cable'
 end
