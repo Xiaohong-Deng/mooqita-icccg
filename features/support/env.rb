@@ -12,6 +12,7 @@ Capybara.register_driver :chrome do |app|
 end
 
 Capybara.javascript_driver = :chrome
+Capybara.server = :puma
 
 Capybara.configure do |config|
   config.default_max_wait_time = 10
