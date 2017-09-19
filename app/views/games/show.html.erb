@@ -16,7 +16,7 @@
   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
 </div>
 
-<% if @game_player.role != "guesser" %>
+<% unless @document.nil? %>
   <div id="document">
     <header>
       <h2>Reading Text</h2>
