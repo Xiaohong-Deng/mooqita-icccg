@@ -12,6 +12,18 @@
       <th>Role: </th>
       <td><%= @game_player.role %></td>
     </tr>
+    <% unless @game_player.role == "judge" %>
+      <tr>
+        <th>Questioner of this round: </th>
+        <td>
+          <% if @game_player.questioner? %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   </table>
   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
 </div>
