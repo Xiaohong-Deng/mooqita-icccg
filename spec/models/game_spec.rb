@@ -1,19 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
+  let(:document) { FactoryGirl.create(:document) }
   describe '.create_with_users_ids' do
-    it 'creates a new game' do
-      Game.create_with_users_ids([])
-
-      expect(Game.all.size).to eq 1
-    end
-
     context 'ids given' do
       before do
         @user1 = User.create(email: "user1@example.com", password: "topsecret")
         @user2 = User.create(email: "user2@example.com", password: "topsecret")
 
         @game = Game.create_with_users_ids([@user1.id, @user2.id])
+        @game.update(document: document)
       end
 
       it 'adds each user that matches id to the game' do
