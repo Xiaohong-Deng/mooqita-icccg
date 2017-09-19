@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   before_action :set_game_player
 
   def show
-    unless @role == "guesser"
+    unless @game_player.role == "guesser"
       @document = @game.document
     end
   end
