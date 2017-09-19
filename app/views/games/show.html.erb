@@ -1,3 +1,45 @@
-<h1>
-  Welcome to ICCCG!!!!!
-</h1>
+<div id="game_attr">
+  <table id="attributes">
+    <tr>
+      <th>Game Round: </th>
+      <td><%= @game_player.round %></td>
+    </tr>
+    <tr>
+      <th>Score: </th>
+      <td><%= @game_player.score %></td>
+    </tr>
+    <tr>
+      <th>Role: </th>
+      <td><%= @game_player.role %></td>
+    </tr>
+    <% unless @game_player.role == "judge" %>
+      <tr>
+        <th>Questioner of this round: </th>
+        <td>
+          <% if @game_player.questioner? %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
+</div>
+
+<% unless @document.nil? %>
+  <div id="document">
+    <header>
+      <h2>Reading Text</h2>
+    </header>
+
+    <%= render @document %>
+  </div>
+<% end %>
+
+<div id="question">
+</div>
+
+<div id="answer">
+</div>
