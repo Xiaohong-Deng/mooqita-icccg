@@ -7,9 +7,8 @@ RSpec.describe Game, type: :model do
       before do
         @user1 = User.create(email: "user1@example.com", password: "topsecret")
         @user2 = User.create(email: "user2@example.com", password: "topsecret")
-
+        allow(Document).to receive(:random_fetch).and_return(document)
         @game = Game.create_with_users_ids([@user1.id, @user2.id])
-        @game.update(document: document)
       end
 
       it 'adds each user that matches id to the game' do

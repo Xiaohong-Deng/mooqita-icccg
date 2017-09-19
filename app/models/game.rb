@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   has_many :game_players, dependent: :destroy
   has_many :players, through: :game_players, source: :user
+  has_many :questions, dependent: :nullify
   belongs_to :document
 
   enum status: [:active, :paused]
