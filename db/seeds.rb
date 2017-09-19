@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 (1..4).each do |n|
- User.create email: "user#{n}@example.com", password: "topsecret"
+  User.create email: "user#{n}@example.com", password: "topsecret"
 end
 
 Dir.glob('db/documents/*.txt').each do |file_name|
