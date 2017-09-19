@@ -1,3 +1,5 @@
+# as the name suggested, it's a module for preparing data for broadcasting
+# template attr is rendered html pages
 module Templatable
   def template
 

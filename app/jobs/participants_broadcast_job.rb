@@ -1,6 +1,6 @@
 class ParticipantsBroadcastJob < ApplicationJob
   include Templatable
-  
+
   queue_as :default
 
   def perform(game)
@@ -9,7 +9,7 @@ class ParticipantsBroadcastJob < ApplicationJob
 
   private
 
-  def data_for game
+  def data_for(game)
     game ? game_starting(game) : participants_size
   end
 end
