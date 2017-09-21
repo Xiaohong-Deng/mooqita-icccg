@@ -12,7 +12,7 @@ end
 
 Dir.glob('db/documents/*.txt').each do |file_name|
   lines = File.open(file_name, 'r').readlines
-  title = lines[0].chomp,
+  title = lines[0].chomp
   content = lines.slice(2, lines.length - 2).join.chomp
 
   Document.create title: title, content: content
