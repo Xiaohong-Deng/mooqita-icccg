@@ -17,3 +17,9 @@ Dir.glob('db/documents/*.txt').each do |file_name|
 
   Document.create title: title, content: content
 end
+
+Game.create document: Document.find(1)
+
+["judge", "reader", "guesser"].each_with_index do |role, index|
+  GamePlayer.create game: Game.find(1), user: User.find(index + 1), role: role
+end
