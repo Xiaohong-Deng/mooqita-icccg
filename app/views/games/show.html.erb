@@ -32,22 +32,26 @@
 
 <div id='game-info' class="container">
 
-  <div id="doc-info" class="doc-info row">
+  <div class="titles row">
+    <% unless @document.nil? %>
     <div class="col-sm-6">
       <h1>Document</h1>
     </div>
+    <% end %>
 
-    <div class="col-sm-6">
+    <div class="<%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
       <h1>Whiteboard</h1>
     </div>
   </div>
 
   <div id="doc-info" class="doc-info row">
-    <div id="document" class="col-sm-6 doc-data">
-      <%= render @document unless @document.nil? %>
+    <% unless @document.nil? %>
+    <div id="document" class="doc-data col-sm-6">
+      <%= render @document %>
     </div>
+    <% end %>
 
-    <div id="whiteboard" class="col-sm-6 doc-data">
+    <div id="whiteboard" class="doc-data <%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
       <%= render 'games/whiteboard' %>
     </div>
   </div>
