@@ -1,45 +1,59 @@
-<div id="game_attr">
+<div id="game_attr row">
   <table id="attributes">
-    <tr>
-      <th>Game Round: </th>
-      <td><%= @game_player.round %></td>
-    </tr>
-    <tr>
-      <th>Score: </th>
-      <td><%= @game_player.score %></td>
-    </tr>
-    <tr>
-      <th>Role: </th>
-      <td><%= @game_player.role %></td>
-    </tr>
-    <% unless @game_player.role == "judge" %>
       <tr>
-        <th>Questioner of this round: </th>
-        <td>
-          <% if @game_player.questioner? %>
-            Yes
-          <% else %>
-            No
-          <% end %>
-        </td>
+        <th>Game Round: </th>
+        <td><%= @game_player.round %></td>
       </tr>
-    <% end %>
+      <tr>
+        <th>Score: </th>
+        <td><%= @game_player.score %></td>
+      </tr>
+      <tr>
+        <th>Role: </th>
+        <td><%= @game_player.role %></td>
+      </tr>
+      <% unless @game_player.role == "judge" %>
+        <tr>
+          <th>Questioner of this round: </th>
+          <td>
+            <% if @game_player.questioner? %>
+              Yes
+            <% else %>
+              No
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
   </table>
-  <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
+   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
 </div>
 
-<% unless @document.nil? %>
-  <div id="document">
-    <header>
-      <h2>Reading Text</h2>
-    </header>
+<%= javascript_tag "$(document).on('DOMContentLoaded', function() { setDocDataHeight(); });" %>
 
-    <%= render @document %>
+<div id='game-info' class="container">
+
+  <div class="titles row">
+    <% unless @document.nil? %>
+    <div class="col-sm-6">
+      <h1>Document</h1>
+    </div>
+    <% end %>
+
+    <div class="<%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
+      <h1>Whiteboard</h1>
+    </div>
   </div>
-<% end %>
 
-<div id="question">
-</div>
+  <div id="doc-info" class="doc-info row">
+    <% unless @document.nil? %>
+    <div id="document" class="doc-data col-sm-6">
+      <%= render @document %>
+    </div>
+    <% end %>
 
-<div id="answer">
+    <div id="whiteboard" class="doc-data <%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
+      <%= render 'games/whiteboard' %>
+    </div>
+  </div>
+
 </div>
