@@ -16,7 +16,6 @@ Scenario: Users enter the game waiting room
   Given I am in user1 browser
   And I am on the sign in page
   When I sign in as "user1@example.com/topsecret"
-  Then I should see "Play Game"
   When I follow "Play Game"
   Then I should see "There are currently 1 player waiting"
   Given I am in user2 browser
@@ -24,3 +23,13 @@ Scenario: Users enter the game waiting room
   When I sign in as "user2@example.com/topsecret"
   Then I follow "Play Game"
   Then I should see "There are currently 2 players waiting"
+  Given I am in user3 browser
+  And I am on the sign in page
+  When I sign in as "user3@example.com/topsecret"
+  Then I follow "Play Game"
+  Then I should see "We have 3 players. redirecting to game...."
+  And I should be on the game page
+  Given I am in user1 browser
+  Then I should be on the game page
+  Given I am in user2 browser
+  Then I should be on the game page
