@@ -29,6 +29,7 @@
 </div>
 
 <%= javascript_tag "$(document).on('DOMContentLoaded', function() { setDocDataHeight(); });" %>
+<%= javascript_tag "$(window).resize(function() { setDocDataHeight(); });" %>
 
 <div id='game-info' class="container">
 
