@@ -38,8 +38,22 @@
   </div>
 <% end %>
 
-<div id="question">
+<div class="panel panel-default">
+  <div class="panel-body" id="current_question" data-game=<%= @game.id %>>
+  </div>
 </div>
 
-<div id="answer">
+<%= render partial: 'questions/question_form', locals: {question: @question, game: @game, round: @game_player.round}%>
+
+<div class="panel panel-default">
+  <div class="panel-body" id="current_answer" data-game=<%= @game.id %> >
+  </div>
+</div>
+
+<%= render partial: 'answers/answer_form', locals: {answer: @answer, question: @question} %>
+
+<div id="questions">
+</div>
+
+<div id="answers">
 </div>
