@@ -37,6 +37,8 @@ gem 'font-awesome-rails'
 gem 'simple_form'
 # Use Webpack to manage app-like JavaScript modules in Rails with Yarn
 gem 'webpacker'
+# to parse markdown text to html
+gem 'kramdown', '~> 1.12.0'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

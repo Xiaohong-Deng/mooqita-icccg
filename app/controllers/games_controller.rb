@@ -5,6 +5,8 @@ class GamesController < ApplicationController
   before_action :set_game_player
 
   def show
+    @question = Question.new
+    @answer = Answer.new
     unless @game_player.role == "guesser"
       @document = @game.document
     end
@@ -25,13 +27,6 @@ class GamesController < ApplicationController
 
     def set_game
       @game = Game.find(params[:id])
-    end
-
-    def authenticate_player!
-      unless @game.players.include? current_user
-        flash[:danger] = 'You are not part of the game'
-        redirect_to root_path
-      end
     end
 
     def set_game_player
