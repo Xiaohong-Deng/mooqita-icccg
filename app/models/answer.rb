@@ -1,6 +1,7 @@
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
+  after_create_commit { AnswerBroadcastJob.perform_now self }
 
   def self.judge_identified_answer_for(question)
     find_by(question_id: question.id, judge_choice: true)
