@@ -12,8 +12,14 @@ end
 
 Dir.glob('db/documents/*.txt').each do |file_name|
   lines = File.open(file_name, 'r').readlines
-  title = lines[0].chomp,
+  title = lines[0].chomp
   content = lines.slice(2, lines.length - 2).join.chomp
 
   Document.create title: title, content: content
+end
+
+Game.create document: Document.find(1)
+
+["judge", "reader", "guesser"].each_with_index do |role, index|
+  GamePlayer.create game: Game.find(1), user: User.find(index + 1), role: role
 end
