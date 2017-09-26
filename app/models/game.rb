@@ -7,7 +7,14 @@ class Game < ApplicationRecord
   enum status: [:active, :paused]
 
   def self.create_with_users_ids(ids)
-    game = Game.create(document: Document.random_fetch)
+    # if validation fails Game.find(game.id) wont find anything
+    # but create returns an invalid game object
+    document = Document.random_fetch
+    unless document
+      # return nil indicating game creating failure
+      return document
+    end
+    game = Game.create(document: document)
     roles_shuffled = GAME_ROLES.map(&:to_s).shuffle
     game_players = game.game_players
 

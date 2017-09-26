@@ -1,0 +1,7 @@
+<%=simple_form_for question, remote: true, authenticity_token: true do |f|%>
+  <%= f.input :content, as: :text, label: :your_question, class: "form-control", data: {textarea: "question"}%>
+
+  <%= f.hidden_field :game_id, value: game.id %>
+  <%= f.hidden_field :round, value: round %>
+  <%= f.button :submit, "send", class: "btn btn-primary", style: "display: none", data: {send: "question"}%>
+<%end%>
