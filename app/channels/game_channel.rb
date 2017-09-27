@@ -29,12 +29,12 @@ class GameChannel < ApplicationCable::Channel
 
     def model_params(model_name, content)
       round = @game_player.round
-      params = {game_id: params['game'], round: round, content: content}
+      model_params = {game_id: params['game'], round: round, content: content}
       if question = @game.questions.find_by(round: round)
-        params[:question_id] = question.id
+        model_params[:question_id] = question.id
       end
-      params.select! { |x| model_name.attribute_names.index(x.to_s) }
-      params[:user] = current_user
-      params
+      model_params.select! { |x| model_name.attribute_names.index(x.to_s) }
+      model_params[:user] = current_user
+      model_params
     end
 end
