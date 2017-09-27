@@ -15,6 +15,7 @@ class GameChannel < ApplicationCable::Channel
     # receive from actioncable js client side code
     # could be question or answer
     # it depends on js code to send a single key hash
+    # with key being the correct model name
     payload_pair = payload.first
     model_name = payload_pair[0].to_s.classify.constantize
     content = payload_pair[1]
