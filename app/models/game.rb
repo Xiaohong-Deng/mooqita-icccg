@@ -26,4 +26,18 @@ class Game < ApplicationRecord
 
     game
   end
+
+  def has_member?(user)
+    game_players.exists?(user_id: user)
+  end
+
+  def has_questioner?(user)
+    game_players.exists?(user_id: user, questioner: true)
+  end
+
+  GAME_ROLES.each do |role|
+    define_method "has_#{role}?" do |user|
+      game_players.exists?(user_id: user, role: role)
+    end
+  end
 end
