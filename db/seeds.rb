@@ -23,3 +23,5 @@ Game.create document: Document.find(1)
 ["judge", "reader", "guesser"].each_with_index do |role, index|
   GamePlayer.create game: Game.find(1), user: User.find(index + 1), role: role
 end
+
+GamePlayer.find(2).update(questioner: true)

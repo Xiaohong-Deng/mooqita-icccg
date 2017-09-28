@@ -1,4 +1,5 @@
 class GameChannel < ApplicationCable::Channel
+  include Pundit
   before_subscribe :set_game_and_player
 
   def subscribed
@@ -15,10 +16,19 @@ class GameChannel < ApplicationCable::Channel
     # receive from actioncable js client side code
     # could be question or answer
     # it depends on js code to send a single key hash
+    # with key being the correct model name
     payload_pair = payload.first
     model_name = payload_pair[0].to_s.classify.constantize
     content = payload_pair[1]
+    # it checks the number of questions or answers created in this round
+    # if questions more than 0 or answers more than 1 for a user, reject
+    authorize model_name, :create?
     model_name.create model_params(model_name, content)
+  end
+  # in order to use extra parameter '@game' in pundit
+  # create a wrapper called 'GameChannelContext'
+  def pundit_user
+    GameChannelContext.new(current_user, @game)
   end
 
   private

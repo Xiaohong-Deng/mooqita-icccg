@@ -1,0 +1,5 @@
+<%=simple_form_for answer, remote: true, authenticity_token: true do |f|%>
+  <%= f.input :judge_choice, as: :check_boxes, label: "Your Choice", collection: [['Day 1', 1], ['Day 2', 2]] %>
+
+  <%= f.button :submit, "send", class: "btn btn-primary", style: "display: none", data: {send: "chosen_answer"}%>
+<%end%>

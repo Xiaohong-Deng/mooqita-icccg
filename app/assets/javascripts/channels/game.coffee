@@ -19,9 +19,15 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
     if data.message_type is "question"
       # alert "question received"
       $("#current_question").append data.message
-    else
+      $("#new_answer").removeClass 'hidden'
+    else if data.message_type is "answer"
       # console.log "answer received"
       $("#current_answer").append data.message
+      if $("#current_answer .current_answer").length is 2
+        console.log "requestJudgeForm"
+        requestJudgeForm()
+    else
+      revealNextRound()
 
   setGameId: (gameId)->
     @gameId = gameId
@@ -37,6 +43,7 @@ submitQuestion = ->
       App['game' + gameId].setGameId gameId
       App['game' + gameId].send {question: question}
       $('#question_content').val ""
+      $(this).hide()
       return false
 
 submitAnswer = ->
@@ -47,4 +54,14 @@ submitAnswer = ->
       App['game' + gameId].setGameId gameId
       App['game' + gameId].send {answer: answer}
       $('#answer_content').val ""
+      $(this).hide()
       return false
+
+requestJudgeForm = ->
+  if $("#judge_form").length isnt 0
+    $.get("games/" + gameId + "/judge", {game_id: gameId}, (data)->
+      $("#judge_form").append data
+    )
+
+revealNextRound = ->
+  $('input[value="Next Round"]').removeClass 'hidden'

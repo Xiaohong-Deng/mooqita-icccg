@@ -39,6 +39,8 @@ gem 'simple_form'
 gem 'webpacker'
 # to parse markdown text to html
 gem 'kramdown', '~> 1.12.0'
+# for authorization based on roles
+gem 'pundit', '1.1.0'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

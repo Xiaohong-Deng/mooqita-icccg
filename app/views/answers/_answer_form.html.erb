@@ -1,5 +1,5 @@
-<%=simple_form_for answer, remote: true, authenticity_token: true do |f|%>
-  <%= f.input :content, as: :text, label: :your_answer, class: "form-control", data: {textarea: "answer"}%>
+<%=simple_form_for answer, remote: true, authenticity_token: true, html: { class: hidden } do |f|%>
+  <%= f.input :content, as: :text, label: "Your Answer", class: "form-control", data: {textarea: "answer"}%>
 
   <%= f.hidden_field :question_id, value: question.id %>
   <%= f.button :submit, "send", class: "btn btn-primary", style: "display: none", data: {send: "answer"}%>
