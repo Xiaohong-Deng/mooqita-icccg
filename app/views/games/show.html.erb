@@ -12,7 +12,7 @@
         <th>Role: </th>
         <td><%= @game_player.role %></td>
       </tr>
-      <% unless @game_player.role == "judge" %>
+      <% if policy(@game).show_questioner? %>
         <tr>
           <th>Questioner of this round: </th>
           <td>
@@ -25,7 +25,7 @@
         </tr>
       <% end %>
   </table>
-   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
+   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary hidden"%>
 </div>
 
 <%= javascript_tag "$(document).on('DOMContentLoaded', function() { setDocDataHeight(); });" %>
@@ -59,16 +59,42 @@
 
 </div>
 
+
 <div class="panel panel-default">
   <div class="panel-body" id="current_question" data-game=<%= @game.id %>>
+  <!-- could be Question.new or some question from db -->
+  <% if @question.persisted? %>
+    <%= render @question %>
+  <% end %>
   </div>
 </div>
 
-<%= render partial: 'questions/question_form', locals: {question: @question, game: @game, round: @game_player.round}%>
+<div>
+  <% if (!@question.persisted?) && policy(@game).question_raiser? %>
+    <%= render partial: 'questions/question_form', locals: {question: @question, game: @game, round: @game_player.round}%>
+  <% end %>
+</div>
 
 <div class="panel panel-default">
-  <div class="panel-body" id="current_answer" data-game=<%= @game.id %> >
+  <div class="panel-body" id="current_answer" data-game=<%= @game.id %>>
+    <% if @answers && @answers.any? %>
+      <%= render @answers %>
+    <% end %>
   </div>
 </div>
 
-<%= render partial: 'answers/answer_form', locals: {answer: @answer, question: @question} %>
+<div>
+  <% if policy(@game).answer_raiser? %>
+  <!-- @answers nil means question is nil, question should be inputted first, so give a hidden input form -->
+  <!-- if it's not nil and current user is not an author for any existed answer, give a visible input form -->
+    <% if @answers.nil? %>
+      <%= render partial: 'answers/answer_form', locals: {answer: @answer, question: @question, hidden: "hidden"} %>
+    <% elsif @answers.find_by(user: current_user).nil? %>
+      <%= render partial: 'answers/answer_form', locals: {answer: @answer, question: @question, hidden: ""} %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if policy(@game).judge? %>
+  <div id="judge_form"></div>
+<% end %>
