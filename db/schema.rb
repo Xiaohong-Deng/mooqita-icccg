@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919060035) do
+ActiveRecord::Schema.define(version: 20170927173738) do
 
   create_table "answers", force: :cascade do |t|
     t.text "content"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170919060035) do
     t.boolean "judge_choice", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["question_id", "user_id"], name: "index_answers_on_question_id_and_user_id", unique: true
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170919060035) do
     t.integer "round"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id", "round"], name: "index_questions_on_game_id_and_round", unique: true
     t.index ["game_id"], name: "index_questions_on_game_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
