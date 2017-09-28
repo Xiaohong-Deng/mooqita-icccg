@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :questions, only: [:create]
-  resources :answers, only: [:create]
+  resources :answers, only: [:create, :update]
 
   mount ActionCable.server => '/cable'
 end

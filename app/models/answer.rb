@@ -4,9 +4,6 @@ class Answer < ApplicationRecord
   validates :question_id, uniqueness: { scope: :user_id }
 
   after_create_commit { AnswerBroadcastJob.perform_now self }
-  # after judge made his choice broadcast to players to tell it's done
-  # show 'next round' button
-  after_update_commit {}
 
   def self.judge_identified_answer_for(question)
     find_by(question_id: question.id, judge_choice: true)

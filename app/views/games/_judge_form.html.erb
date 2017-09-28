@@ -1,0 +1,3 @@
+<%= simple_form_for answer, remote: true, authenticity_token: true do |f| %>
+  <%= f.button :submit, "Choose Me!", class: "btn btn-primary", data: {send: "answer"}, id: order + "submit_button"%>
+<% end %>

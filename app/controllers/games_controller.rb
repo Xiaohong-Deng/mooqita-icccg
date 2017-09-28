@@ -1,14 +1,15 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_game, except: [:judge]
-  before_action :set_game_player, except: [:judge]
+  before_action :set_game
+  before_action :set_game_player
   before_action :set_document, except: [:judge]
-  before_action :set_current_qa, except: [:judge]
+  before_action :set_current_qa
 
   def show
     authorize @game
     @question ||= Question.new
     @answer = Answer.new
+    @is_end = round_end?
   end
 
   def update
@@ -24,6 +25,8 @@ class GamesController < ApplicationController
   end
 
   def judge
+    authorize @game
+    render layout: false
   end
 
   private
@@ -46,7 +49,7 @@ class GamesController < ApplicationController
       @answers = @question.answers if @question
     end
 
-    def judge_params
-      # params.require()
+    def round_end?
+      @answers && @answers.exists?(judge_choice: true)
     end
 end
