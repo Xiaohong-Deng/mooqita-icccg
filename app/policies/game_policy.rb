@@ -10,7 +10,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    show? && record.round_end_for?(user)
   end
 
   def show_questioner?

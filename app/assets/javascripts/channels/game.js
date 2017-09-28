@@ -21,10 +21,10 @@ App['game' + gameId] = App.cable.subscriptions.create({
     } else if (data.message_type === "answer") {
       $("#current_answer").append(data.message);
       if ($("#current_answer .current_answer").length === 2) {
-        console.log("requestJudgeForm");
         return requestJudgeForm();
       }
     } else {
+      $("#info").append(data.message);
       return revealNextRound();
     }
   },
@@ -69,9 +69,8 @@ submitAnswer = function() {
 
 requestJudgeForm = function() {
   if ($("#judge_form").length !== 0) {
-    return $.get("games/" + gameId + "/judge", {
-      game_id: gameId
-    }, function(data) {
+    console.log("sending judge form request");
+    return $.get(gameId + "/judge", function(data) {
       return $("#judge_form").append(data);
     });
   }

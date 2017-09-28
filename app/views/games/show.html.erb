@@ -25,7 +25,11 @@
         </tr>
       <% end %>
   </table>
-   <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary hidden"%>
+  <% if @is_end %>
+    <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
+  <% else %>
+    <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary hidden"%>
+  <% end %>
 </div>
 
 <%= javascript_tag "$(document).on('DOMContentLoaded', function() { setDocDataHeight(); });" %>
@@ -34,7 +38,7 @@
 <div id='game-info' class="container">
 
   <div class="titles row">
-    <% unless @document.nil? %>
+    <% if @document %>
     <div class="col-sm-6">
       <h1>Document</h1>
     </div>
@@ -46,7 +50,7 @@
   </div>
 
   <div id="doc-info" class="doc-info row">
-    <% unless @document.nil? %>
+    <% if @document %>
     <div id="document" class="doc-data col-sm-6">
       <%= render @document %>
     </div>
@@ -96,5 +100,20 @@
 </div>
 
 <% if policy(@game).judge? %>
-  <div id="judge_form"></div>
+  <div id="judge_form">
+    <% if @answers && @answers.size == 2 && !@answers.exists?(judge_choice: true) %>
+      <% @answers.each_with_index do |answer, index| %>
+        <%= render answer %>
+        <%= render "judge_form", answer: answer, order: index.to_s %>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body" id="info">
+    <% if @is_end %>
+      <p>Judge has made his choice</p>
+    <% end %>
+  </div>
+</div>

@@ -27,6 +27,15 @@ class Game < ApplicationRecord
     game
   end
 
+  def round_end_for?(user)
+    player_round = game_players.find_by(user: user).round
+    if question = questions.find(round: player_round)
+      question.answers.find(judge_choice: true)
+    else
+      question
+    end
+  end
+
   def has_member?(user)
     game_players.exists?(user_id: user)
   end

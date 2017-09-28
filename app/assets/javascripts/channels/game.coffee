@@ -24,9 +24,10 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
       # console.log "answer received"
       $("#current_answer").append data.message
       if $("#current_answer .current_answer").length is 2
-        console.log "requestJudgeForm"
+        # console.log "requestJudgeForm"
         requestJudgeForm()
     else
+      $("#info").append data.message
       revealNextRound()
 
   setGameId: (gameId)->
@@ -59,7 +60,8 @@ submitAnswer = ->
 
 requestJudgeForm = ->
   if $("#judge_form").length isnt 0
-    $.get("games/" + gameId + "/judge", {game_id: gameId}, (data)->
+    console.log "sending judge form request"
+    $.get(gameId + "/judge", (data)->
       $("#judge_form").append data
     )
 

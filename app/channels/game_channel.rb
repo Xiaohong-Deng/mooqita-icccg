@@ -3,9 +3,9 @@ class GameChannel < ApplicationCable::Channel
   before_subscribe :set_game_and_player
 
   def subscribed
-    stream_for current_user
     stream_from "game-#{params['game']}: questions"
     stream_from "game-#{params['game']}: answers"
+    stream_from "game-#{params['game']}: info"
   end
 
   def unsubscribed
