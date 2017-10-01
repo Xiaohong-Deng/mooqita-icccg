@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927173738) do
+ActiveRecord::Schema.define(version: 20171001165430) do
 
   create_table "answers", force: :cascade do |t|
     t.text "content"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170927173738) do
     t.integer "score", default: 0
     t.integer "round", default: 1
     t.boolean "questioner", default: false
+    t.boolean "next_questioner", default: false
     t.index ["game_id"], name: "index_game_players_on_game_id"
     t.index ["user_id"], name: "index_game_players_on_user_id"
   end
