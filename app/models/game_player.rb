@@ -6,6 +6,14 @@ class GamePlayer < ApplicationRecord
   enum role: [:unassigned] + GAME_ROLES
 
   def set_questioner
-    update(questioner: true)
+    update!(questioner: true)
+  end
+
+  def set_next_questioner
+    update!(next_questioner: true)
+  end
+
+  def reset_next_questioner
+    update!(next_questioner: false)
   end
 end
