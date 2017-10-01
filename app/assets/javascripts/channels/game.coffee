@@ -2,6 +2,7 @@ $(document).ready ->
   # alert "hello world" workds fine
   submitQuestion()
   submitAnswer()
+  hideJudgeForm()
   return
 
 gameId = window.location.pathname.substring("games/".length + 1)
@@ -60,10 +61,19 @@ submitAnswer = ->
 
 requestJudgeForm = ->
   if $("#judge_form").length isnt 0
-    console.log "sending judge form request"
     $.get(gameId + "/judge", (data)->
       $("#judge_form").append data
     )
+
+hideJudgeForm = ->
+  $('#0_submit_button').on('click', ->
+    $('#judge_form').addClass 'hidden'
+    return
+  )
+  $('#1_submit_button').on('click', ->
+    $('#judge_form').addClass 'hidden'
+    return
+  )
 
 revealNextRound = ->
   $('input[value="Next Round"]').removeClass 'hidden'
