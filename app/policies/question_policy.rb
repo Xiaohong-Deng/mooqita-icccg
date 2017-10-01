@@ -14,7 +14,10 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def create?
-    game_player = game.game_players.find_by(user: user)
-    game_player.questioner? && Question.find_by(game: game, round: game_player.round).nil?
+    if game_player = game.game_players.find_by(user: user)
+      game_player.questioner? && Question.find_by(game: game, round: game_player.round).nil?
+    else
+      false
+    end
   end
 end
