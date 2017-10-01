@@ -15,7 +15,10 @@ class GamesController < ApplicationController
   def update
     authorize @game
     round = @game_player.round + 1
-    if @game_player.update(round: round)
+    if is_questioner = @game_player.next_questioner
+      @game_player.reset_next_questioner
+    end
+    if @game_player.update(round: round, questioner: is_questioner)
       flash[:notice] = "You successfully entered the next round"
       redirect_to game_path
     else

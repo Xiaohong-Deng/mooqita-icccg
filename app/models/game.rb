@@ -22,13 +22,19 @@ class Game < ApplicationRecord
       game_players.create(user_id: id, role: role)
     end
 
-    game_players.exclude_role("judge").shuffle[0].set_questioner
+    questioner.set_questioner
 
     game
   end
 
+  def set_next_questioner
+    questioner.set_next_questioner
+  end
+
   def round_end_for?(user)
     player_round = game_players.find_by(user: user).round
+    # if question exists and there is a answer marked true for it
+    # then this round is ended, otherwise not
     if question = questions.find(round: player_round)
       question.answers.find(judge_choice: true)
     else
@@ -49,4 +55,9 @@ class Game < ApplicationRecord
       game_players.exists?(user_id: user, role: role)
     end
   end
+
+  private
+    def questioner
+      game_players.exclude_role("judge").shuffle[0]
+    end
 end
