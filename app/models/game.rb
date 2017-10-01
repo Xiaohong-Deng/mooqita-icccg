@@ -6,6 +6,8 @@ class Game < ApplicationRecord
 
   enum status: [:active, :paused]
 
+  delegate :set_next_questioner, to: :questioner
+
   def self.create_with_users_ids(ids)
     # if validation fails Game.find(game.id) wont find anything
     # but create returns an invalid game object
@@ -25,10 +27,6 @@ class Game < ApplicationRecord
     questioner.set_questioner
 
     game
-  end
-
-  def set_next_questioner
-    questioner.set_next_questioner
   end
 
   def round_end_for?(user)
