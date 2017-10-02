@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001165430) do
+ActiveRecord::Schema.define(version: 20171002082946) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.text "content"
-    t.integer "question_id"
-    t.integer "user_id"
+    t.bigint "question_id"
+    t.bigint "user_id"
     t.boolean "judge_choice", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["question_id", "judge_choice"], name: "index_answers_on_question_id_and_judge_choice", unique: true, where: "(judge_choice IS TRUE)"
     t.index ["question_id", "user_id"], name: "index_answers_on_question_id_and_user_id", unique: true
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
@@ -32,8 +36,8 @@ ActiveRecord::Schema.define(version: 20171001165430) do
   end
 
   create_table "game_players", force: :cascade do |t|
-    t.integer "game_id"
-    t.integer "user_id"
+    t.bigint "game_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
@@ -49,14 +53,14 @@ ActiveRecord::Schema.define(version: 20171001165430) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "document_id"
+    t.bigint "document_id"
     t.index ["document_id"], name: "index_games_on_document_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.text "content"
-    t.integer "game_id"
-    t.integer "user_id"
+    t.bigint "game_id"
+    t.bigint "user_id"
     t.integer "round"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,4 +86,11 @@ ActiveRecord::Schema.define(version: 20171001165430) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "game_players", "games"
+  add_foreign_key "game_players", "users"
+  add_foreign_key "games", "documents"
+  add_foreign_key "questions", "games"
+  add_foreign_key "questions", "users"
 end
