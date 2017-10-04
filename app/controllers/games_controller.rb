@@ -15,11 +15,24 @@ class GamesController < ApplicationController
   def update
     authorize @game
     round = @game_player.round + 1
+
     if is_questioner = @game_player.next_questioner
       @game_player.reset_next_questioner
     end
-    if @game_player.update(round: round, questioner: is_questioner)
+
+    if is_scored = @game_player.scored?
+      new_score = @game_player.score + 1
+    else
+      new_score = @game_player.score - 1
+    end
+
+    if @game_player.update(round: round, score: new_score, questioner: is_questioner)
       flash[:notice] = "You successfully entered the next round"
+      if is_scored
+        flash[:notice] = "<br>Congratulations, you gained a point in the last round."
+      else
+        flash[:error] = "Sorry, you lost a point in the last round."
+      end
       redirect_to game_path
     else
       flash[:alert] = "You failed to enter the next round"
