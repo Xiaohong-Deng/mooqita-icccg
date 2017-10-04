@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     if @game_player.update(round: round, score: new_score, questioner: is_questioner)
       flash[:notice] = "You successfully entered the next round"
       if is_scored
-        flash[:notice] = "<br>Congratulations, you gained a point in the last round."
+        flash[:notice] << "<br>Congratulations, you gained a point in the last round."
       else
         flash[:error] = "Sorry, you lost a point in the last round."
       end
