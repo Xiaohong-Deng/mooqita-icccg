@@ -66,12 +66,12 @@ requestJudgeForm = ->
     )
 
 hideJudgeForm = ->
-  $('#0_submit_button').on('click', ->
-    $('#judge_form').addClass 'hidden'
+  $(document).on('click', '#0_submit_button', ->
+    $('#judge_form').hide()
     return
   )
-  $('#1_submit_button').on('click', ->
-    $('#judge_form').addClass 'hidden'
+  $(document).on('click', '#1_submit_button', ->
+    $('#judge_form').hide()
     return
   )
 
