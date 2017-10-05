@@ -35,7 +35,7 @@ App['game' + gameId] = App.cable.subscriptions.create({
 });
 
 submitQuestion = function() {
-  return $("#question_content").keydown(function(event) {
+  return $("#question_content").unbind('keydown').bind('keydown', function(event) {
     var question;
     if (event.keyCode === 13 && !event.shiftKey) {
       question = event.target.value;
@@ -52,7 +52,7 @@ submitQuestion = function() {
 };
 
 submitAnswer = function() {
-  return $("#answer_content").keydown(function(event) {
+  return $("#answer_content").unbind('keydown').bind('keydown', function(event) {
     var answer;
     if (event.keyCode === 13 && !event.shiftKey) {
       answer = event.target.value;
@@ -63,7 +63,6 @@ submitAnswer = function() {
       });
       $('#answer_content').val("");
       $(this).hide();
-      return false;
     }
   });
 };

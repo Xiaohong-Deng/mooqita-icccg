@@ -1,5 +1,4 @@
 $(document).ready ->
-  # alert "hello world" workds fine
   submitQuestion()
   submitAnswer()
   hideJudgeForm()
@@ -16,16 +15,12 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    # console.log "message received"
     if data.message_type is "question"
-      # alert "question received"
       $("#current_question").append data.message
       $("#new_answer").removeClass 'hidden'
     else if data.message_type is "answer"
-      # console.log "answer received"
       $("#current_answer").append data.message
       if $("#current_answer .current_answer").length is 2
-        # console.log "requestJudgeForm"
         requestJudgeForm()
     else
       $("#info").append data.message
@@ -37,8 +32,7 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
 
 
 submitQuestion = ->
-  $("#question_content").keydown (event) ->
-    # alert "key down" workds fine
+  $("#question_content").unbind('keydown').bind 'keydown', (event) ->
     if event.keyCode is 13 && !event.shiftKey
       question = event.target.value
       gameId = $("[data-game]").data().game
@@ -49,7 +43,7 @@ submitQuestion = ->
       return false
 
 submitAnswer = ->
-  $("#answer_content").keydown (event)->
+  $("#answer_content").unbind('keydown').bind 'keydown', (event)->
     if event.keyCode is 13 && !event.shiftKey
       answer = event.target.value
       gameId = $("[data-game]").data().game
@@ -57,7 +51,7 @@ submitAnswer = ->
       App['game' + gameId].send {answer: answer}
       $('#answer_content').val ""
       $(this).hide()
-      return false
+      return
 
 requestJudgeForm = ->
   if $("#judge_form").length isnt 0
