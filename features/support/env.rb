@@ -5,13 +5,22 @@
 # files.
 
 require 'cucumber/rails'
-require "capybara/cucumber"
+# require "capybara/cucumber"
+require 'capybara/poltergeist'
 
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :chrome)
+# end
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false,
+                                    phantomjs: Phantomjs.path,
+                                    phantomjs_options: ['--ssl-protocol=tlsv1.2', '--ignore-ssl-errors=yes'])
 end
 
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver = :poltergeist
+
+# Capybara.javascript_driver = :chrome
 Capybara.server = :puma
 
 Capybara.configure do |config|
