@@ -60,8 +60,10 @@ group :test do
   gem 'guard-rspec', require: false
   gem 'rspec-rails'
   gem 'capybara', '~> 2.13.0'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'phantomjs'
+  gem 'poltergeist'
+  # gem 'selenium-webdriver'
+  # gem 'chromedriver-helper'
 end
 
 group :development do
