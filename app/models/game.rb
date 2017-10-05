@@ -16,11 +16,11 @@ class Game < ApplicationRecord
       # return nil indicating game creating failure
       return document
     end
-    game = Game.create(document: document)
+    game = Game.create!(document: document)
     roles_shuffled = GAME_ROLES.map(&:to_s).shuffle
     game_players = game.game_players
     ids.zip(roles_shuffled).each do |id, role|
-      game_players.create(user_id: id, role: role)
+      game_players.create!(user_id: id, role: role)
     end
 
     game.next_questioner.set_questioner
