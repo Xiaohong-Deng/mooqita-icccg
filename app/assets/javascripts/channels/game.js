@@ -77,11 +77,11 @@ requestJudgeForm = function() {
 };
 
 hideJudgeForm = function() {
-  $('#0_submit_button').on('click', function() {
-    $('#judge_form').addClass('hidden');
+  $(document).on('click', '#0_submit_button', function() {
+    $('#judge_form').hide();
   });
-  return $('#1_submit_button').on('click', function() {
-    $('#judge_form').addClass('hidden');
+  return $(document).on('click', '#1_submit_button', function() {
+    $('#judge_form').hide();
   });
 };
 
