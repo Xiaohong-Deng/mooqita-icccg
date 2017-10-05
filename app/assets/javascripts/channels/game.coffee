@@ -30,7 +30,9 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
     @gameId = gameId
     return
 
-
+# we use a form to let users input data but doesn't submit through the form
+# it's pretty hacky. bc form need a route, especially we don't need questions_controller
+# yet, so the route question#create is there for a dummy form
 submitQuestion = ->
   $("#question_content").unbind('keydown').bind 'keydown', (event) ->
     if event.keyCode is 13 && !event.shiftKey
