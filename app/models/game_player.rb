@@ -18,7 +18,7 @@ class GamePlayer < ApplicationRecord
   end
 
   def scored?
-    chosen_player = Answer.judge_identified_answer(game.question).user
+    chosen_player = Answer.judge_identified_answer_for(game.questions.find_by(round: round)).user
     # left handles reader and guesser, right handles judge
     # we can not trace back to chosen answer's author's role
     # by question, answer or user_id, so that is convoluted

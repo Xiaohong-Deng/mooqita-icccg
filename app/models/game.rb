@@ -6,7 +6,7 @@ class Game < ApplicationRecord
 
   enum status: [:active, :paused]
 
-  delegate :set_next_questioner, to: :questioner
+  delegate :set_next_questioner, to: :next_questioner
 
   def self.create_with_users_ids(ids)
     # if validation fails Game.find(game.id) wont find anything
@@ -19,12 +19,11 @@ class Game < ApplicationRecord
     game = Game.create(document: document)
     roles_shuffled = GAME_ROLES.map(&:to_s).shuffle
     game_players = game.game_players
-
     ids.zip(roles_shuffled).each do |id, role|
       game_players.create(user_id: id, role: role)
     end
 
-    questioner.set_questioner
+    game.next_questioner.set_questioner
 
     game
   end
@@ -33,8 +32,8 @@ class Game < ApplicationRecord
     player_round = game_players.find_by(user: user).round
     # if question exists and there is a answer marked true for it
     # then this round is ended, otherwise not
-    if question = questions.find(round: player_round)
-      question.answers.find(judge_choice: true)
+    if question = questions.find_by(round: player_round)
+      question.answers.find_by(judge_choice: true)
     else
       question
     end
@@ -54,8 +53,7 @@ class Game < ApplicationRecord
     end
   end
 
-  private
-    def questioner
-      game_players.exclude_role("judge").shuffle[0]
-    end
+  def next_questioner
+    game_players.exclude_role("judge").shuffle[0]
+  end
 end

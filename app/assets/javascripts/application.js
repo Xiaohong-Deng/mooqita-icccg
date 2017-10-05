@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap
 //= require rails-ujs
+//= require bootstrap
 //= require spin.js/spin
 //= require_tree .

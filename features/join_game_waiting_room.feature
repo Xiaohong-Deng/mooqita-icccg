@@ -1,4 +1,4 @@
-Feature: User can join game waiting room and see other users in the room
+Feature: User can join game waiting room, start a new game with other users
 
   As a icccg user
   So that I can start playing game with other users
