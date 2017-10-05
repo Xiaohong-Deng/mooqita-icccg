@@ -13,6 +13,7 @@ class Answer < ApplicationRecord
   end
 
   def make_judge_identified!
+    Answer.where(question_id: question.id).update_all(judge_choice: false)
     update!(judge_choice: true)
   end
 end
