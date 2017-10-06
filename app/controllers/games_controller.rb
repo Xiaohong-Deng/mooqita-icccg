@@ -21,10 +21,10 @@ class GamesController < ApplicationController
     end
 
     if @game_player.scored?
-      flash[:info] = "Congratulations, you gained a point in the last round."
+      flash[:info] = "<strong>Congratulations!</strong> you gained a point in the last round."
       new_score = @game_player.score + 1
     else
-      flash[:error] = "Sorry, you lost a point in the last round."
+      flash[:error] = "<strong>Sorry!</strong> you lost a point in the last round."
       new_score = @game_player.score - 1
     end
 
@@ -32,6 +32,7 @@ class GamesController < ApplicationController
       flash[:notice] = "You successfully entered the next round"
       redirect_to game_path
     else
+      flash.clear
       flash[:alert] = "You failed to enter the next round"
       redirect_to root_path
     end
