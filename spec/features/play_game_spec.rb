@@ -3,9 +3,6 @@ require_relative "shared_examples/reader"
 require_relative "shared_examples/whiteboard"
 require_relative "shared_examples/game_attributes"
 
-ROUND = 42
-SCORE = 1024
-
 RSpec.describe 'Players can play the game' do
   let(:user) { FactoryGirl.create(:user) }
   let(:document) { FactoryGirl.create(:document) }
@@ -19,7 +16,7 @@ RSpec.describe 'Players can play the game' do
 
     context 'as a judge' do
       before do
-        assign_role!(user, :judge, game, ROUND, SCORE)
+        assign_role!(user, :judge, game)
         @game_player = GamePlayer.find_by(user: user)
         visit game_path(game)
       end
@@ -31,7 +28,7 @@ RSpec.describe 'Players can play the game' do
 
     context 'as a reader' do
       before do
-        assign_role!(user, :reader, game, ROUND, SCORE)
+        assign_role!(user, :reader, game)
         @game_player = GamePlayer.find_by(user: user)
         visit game_path(game)
       end
@@ -43,7 +40,7 @@ RSpec.describe 'Players can play the game' do
 
     context 'as a guesser' do
       before do
-        assign_role!(user, :guesser, game, ROUND, SCORE)
+        assign_role!(user, :guesser, game,)
         @game_player = GamePlayer.find_by(user: user)
         visit game_path(game)
       end
