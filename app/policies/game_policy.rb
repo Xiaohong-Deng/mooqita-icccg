@@ -14,7 +14,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def show_questioner?
-    ! judge?
+    show? && ! judge?
   end
 
   def answer_raiser?
