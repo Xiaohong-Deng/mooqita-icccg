@@ -1,28 +1,90 @@
 require 'rails_helper'
 
 RSpec.describe AnswerPolicy do
+  context 'permissions' do
+    subject { AnswerPolicy.new(GameChannelContext.new(user, game), answer) }
 
-  let(:user) { User.new }
+    let(:user) { FactoryGirl.create(:user) }
+    let(:document) { FactoryGirl.create(:document) }
+    let(:game) { FactoryGirl.create(:game, document: document) }
+    let(:question) { FactoryGirl.create(:question, game: game, user: FactoryGirl.create(:user), round: ROUND) }
+    let(:answer) { FactoryGirl.create(:answer, question: question, user: FactoryGirl.create(:user)) }
 
-  subject { described_class }
+    context 'for anonymous users' do
+      let(:user) { nil }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      it { should_not permit_action :create }
+      it { should_not permit_action :update }
+    end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'for judge of the game' do
+      before { assign_role!(user, :judge, game) }
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      it { should_not permit_action :create }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+      context 'when answer is not chosen' do
+        it { should permit_action :update }
+      end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      context 'when answer is chosen' do
+        let(:answer) { FactoryGirl.create(:answer, question: question,
+          user: FactoryGirl.create(:user), judge_choice: true) }
+
+        it { should_not permit_action :update }
+      end
+    end
+
+    context 'for reader of the game' do
+      before { assign_role!(user, :reader, game) }
+
+      it { should_not permit_action :update }
+
+      context "when player's answer is not raised" do
+        it { should permit_action :create }
+      end
+
+      context "when player's answer is raised" do
+        let(:answer) { FactoryGirl.create(:answer, question: question, user: user) }
+
+        it { should_not permit_action :create }
+      end
+    end
+
+    context 'for guesser of the game' do
+      before { assign_role!(user, :guesser, game) }
+
+      it { should_not permit_action :update }
+
+      context "when player's answer is not raised" do
+        it { should permit_action :create }
+      end
+
+      context "when player's answer is raised" do
+        let(:answer) { FactoryGirl.create(:answer, question: question, user: user) }
+
+        it { should_not permit_action :create }
+      end
+    end
+
+    context 'for judges of other games' do
+      before { assign_role!(user, :judge, FactoryGirl.create(:game, document: document)) }
+
+      it { should_not permit_action :create }
+      it { should_not permit_action :update }
+    end
+
+    context 'for readers of other games' do
+      before { assign_role!(user, :reader, FactoryGirl.create(:game, document: document)) }
+
+      it { should_not permit_action :create }
+      it { should_not permit_action :update }
+    end
+
+    context 'for guessers of other games' do
+      before { assign_role!(user, :guesser, FactoryGirl.create(:game, document: document)) }
+
+      it { should_not permit_action :create }
+      it { should_not permit_action :update }
+    end
   end
 end
