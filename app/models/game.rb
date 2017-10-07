@@ -23,7 +23,7 @@ class Game < ApplicationRecord
       game_players.create!(user_id: id, role: role)
     end
 
-    game.next_questioner.set_questioner
+    next_questioner(game).set_questioner
 
     game
   end
@@ -53,7 +53,12 @@ class Game < ApplicationRecord
     end
   end
 
-  def next_questioner
-    game_players.exclude_role("judge").shuffle[0]
-  end
+  private
+    def self.next_questioner(game)
+      game.game_players.exclude_role("judge").shuffle[0]
+    end
+
+    def next_questioner
+      game_players.exclude_role("judge").shuffle[0]
+    end
 end
