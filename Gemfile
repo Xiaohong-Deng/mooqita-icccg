@@ -62,6 +62,7 @@ group :test do
   gem 'capybara', '~> 2.13.0'
   gem 'phantomjs'
   gem 'poltergeist'
+  gem 'simplecov', require: false
   # gem 'selenium-webdriver'
   # gem 'chromedriver-helper'
 end
