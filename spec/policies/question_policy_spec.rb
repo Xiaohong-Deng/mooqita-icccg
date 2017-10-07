@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionPolicy do
   context 'permissions' do
-    subject { QuestionPolicy.new(GameChannelContext.new(user, game), Question.new) }
+    subject { QuestionPolicy.new(GameChannelContext.new(user, game),
+      FactoryGirl.create(:question, game: game, user: FactoryGirl.create(:user))) }
 
     let(:user) { FactoryGirl.create(:user) }
     let(:document) { FactoryGirl.create(:document) }
