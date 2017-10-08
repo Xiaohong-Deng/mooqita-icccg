@@ -74,7 +74,7 @@
 </div>
 
 <div>
-  <% if (!@question.persisted?) && policy(@game).question_raiser? %>
+  <% if (!@question.persisted?) && policy(@game).raise_question? %>
     <%= render partial: 'questions/question_form', locals: {question: @question, game: @game, round: @game_player.round}%>
   <% end %>
 </div>
@@ -88,7 +88,7 @@
 </div>
 
 <div>
-  <% if policy(@game).answer_raiser? %>
+  <% if policy(@game).raise_answer? %>
   <!-- @answers nil means question is nil, question should be inputted first, so give a hidden input form -->
   <!-- if it's not nil and current user is not an author for any existed answer, give a visible input form -->
     <% if @answers.nil? %>
