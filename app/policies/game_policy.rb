@@ -17,11 +17,11 @@ class GamePolicy < ApplicationPolicy
     show? && ! judge?
   end
 
-  def answer_raiser?
+  def raise_answer?
     show_questioner?
   end
 
-  def question_raiser?
+  def raise_question?
     record.has_questioner? user
   end
 

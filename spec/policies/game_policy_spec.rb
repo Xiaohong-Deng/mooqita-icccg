@@ -15,8 +15,8 @@ RSpec.describe GamePolicy do
       it { should_not permit_action :show }
       it { should_not permit_action :update }
       it { should_not permit_action :show_questioner }
-      it { should_not permit_action :answer_raiser }
-      it { should_not permit_action :question_raiser }
+      it { should_not permit_action :raise_answer }
+      it { should_not permit_action :raise_question }
       it { should_not permit_action :judge }
     end
 
@@ -26,8 +26,8 @@ RSpec.describe GamePolicy do
       it { should permit_action :show }
       it { should_not permit_action :show_questioner }
       it { should permit_action :judge }
-      it { should_not permit_action :question_raiser }
-      it { should_not permit_action :answer_raiser }
+      it { should_not permit_action :raise_question }
+      it { should_not permit_action :raise_answer }
 
       context 'when round has not ended' do
         it { should_not permit_action :update }
@@ -45,17 +45,17 @@ RSpec.describe GamePolicy do
 
       it { should permit_action :show }
       it { should permit_action :show_questioner }
-      it { should permit_action :answer_raiser }
+      it { should permit_action :raise_answer }
       it { should_not permit_action :judge }
 
       context 'when is not questioner' do
-        it { should_not permit_action :question_raiser }
+        it { should_not permit_action :raise_question }
       end
 
       context 'when is questioner' do
         before { assign_role!(user, :reader, game, questioner: true) }
 
-        it { should permit_action :question_raiser }
+        it { should permit_action :raise_question }
       end
 
       context 'when round has not ended' do
@@ -74,17 +74,17 @@ RSpec.describe GamePolicy do
 
       it { should permit_action :show }
       it { should permit_action :show_questioner }
-      it { should permit_action :answer_raiser }
+      it { should permit_action :raise_answer }
       it { should_not permit_action :judge }
 
       context 'when is not questioner' do
-        it { should_not permit_action :question_raiser }
+        it { should_not permit_action :raise_question }
       end
 
       context 'when is questioner' do
         before { assign_role!(user, :guesser, game, questioner: true) }
 
-        it { should permit_action :question_raiser }
+        it { should permit_action :raise_question }
       end
 
       context 'when round has not ended' do
@@ -104,8 +104,8 @@ RSpec.describe GamePolicy do
       it { should_not permit_action :show }
       it { should_not permit_action :update }
       it { should_not permit_action :show_questioner }
-      it { should_not permit_action :answer_raiser }
-      it { should_not permit_action :question_raiser }
+      it { should_not permit_action :raise_answer }
+      it { should_not permit_action :raise_question }
       it { should_not permit_action :judge }
     end
 
@@ -115,8 +115,8 @@ RSpec.describe GamePolicy do
       it { should_not permit_action :show }
       it { should_not permit_action :update }
       it { should_not permit_action :show_questioner }
-      it { should_not permit_action :answer_raiser }
-      it { should_not permit_action :question_raiser }
+      it { should_not permit_action :raise_answer }
+      it { should_not permit_action :raise_question }
       it { should_not permit_action :judge }
     end
 
@@ -126,8 +126,8 @@ RSpec.describe GamePolicy do
       it { should_not permit_action :show }
       it { should_not permit_action :update }
       it { should_not permit_action :show_questioner }
-      it { should_not permit_action :answer_raiser }
-      it { should_not permit_action :question_raiser }
+      it { should_not permit_action :raise_answer }
+      it { should_not permit_action :raise_question }
       it { should_not permit_action :judge }
     end
   end
