@@ -1,5 +1,5 @@
 RSpec.shared_examples "general_attributes" do |role|
-  it 'should see general attributes' do
+  scenario 'can see general attributes' do
     within("#attributes") do
       expect(page).to have_content "#{role}"
       expect(page).to have_content @game_player.round.to_s
@@ -9,7 +9,7 @@ RSpec.shared_examples "general_attributes" do |role|
 end
 
 RSpec.shared_examples "questioner" do
-  it 'should see questioner' do
+  scenario 'can see questioner' do
     within("#attributes") do
       expect(page).to have_content "Questioner of this round: "
     end
@@ -17,7 +17,7 @@ RSpec.shared_examples "questioner" do
 end
 
 RSpec.shared_examples "not questioner" do
-  it 'should not see questioner' do
+  scenario 'can not see questioner' do
     within("#attributes") do
       expect(page).not_to have_content "Questioner of this round: "
     end

@@ -48,7 +48,7 @@ RSpec.describe 'Players can play the game' do
         visit game_path(game)
       end
 
-      it 'should not see the document content' do
+      scenario 'can not see the document content' do
         expect(page).not_to have_selector "#document"
         expect(page).not_to have_content "Document"
 

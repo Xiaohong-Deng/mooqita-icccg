@@ -1,5 +1,5 @@
 RSpec.shared_examples "reader" do
-  it 'should see the document content' do
+  scenario 'can see the document content' do
     within(".titles") do
       expect(page).to have_content "Document"
     end
