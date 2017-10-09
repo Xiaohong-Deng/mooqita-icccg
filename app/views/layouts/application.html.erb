@@ -14,7 +14,7 @@
 
     <div class="main-container container">
       <% flash.each do |message_type, message| %>
-      <div class="<%= flash_class(message_type) %>"><%= message %></div>
+      <div class="<%= flash_class(message_type) %>"><%= sanitize message %></div>
       <% end %>
 
       <%= yield %>

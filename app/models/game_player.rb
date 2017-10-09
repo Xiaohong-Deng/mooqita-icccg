@@ -19,10 +19,11 @@ class GamePlayer < ApplicationRecord
 
   def scored?
     chosen_player = Answer.judge_identified_answer_for(game.questions.find_by(round: round)).user
-    # left handles reader and guesser, right handles judge
-    # we can not trace back to chosen answer's author's role
-    # by question, answer or user_id, so that is convoluted
-    ((chosen_player == user) ^ (role == "guesser")) ||
-      chosen_player.game_players.find_by(game: game).role == "reader"
+    # if user is either reader or guesser, then he needs to be chosen to win
+    # if user is judge, he can't be chosen, he needs to choose reader to win
+    # if reader or guesser is not chosen, then they lose
+    chosen_player == user ||
+      (user.game_players.find_by(game: game).role == "judge" &&
+        chosen_player.game_players.find_by(game: game).role == "reader")
   end
 end
