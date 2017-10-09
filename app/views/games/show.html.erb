@@ -57,7 +57,7 @@
     <% end %>
 
     <div id="whiteboard" class="doc-data <%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
-      <%= render 'games/whiteboard' %>
+      <%= render 'games/whiteboard', game: @game, round: @game_player.round %>
     </div>
   </div>
 

@@ -53,6 +53,10 @@ class Game < ApplicationRecord
     end
   end
 
+  def past_questions(round)
+    questions.where("round < ?", round)
+  end
+
   private
     def self.next_questioner(game)
       game.game_players.exclude_role("judge").shuffle[0]

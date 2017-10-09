@@ -7,6 +7,9 @@ RSpec.describe 'Players can play the game' do
   let(:user) { FactoryGirl.create(:user) }
   let(:document) { FactoryGirl.create(:document) }
   let(:game) { FactoryGirl.create(:game, document: document) }
+  let!(:question) { FactoryGirl.create(:question, game: game, user: FactoryGirl.create(:user)) }
+  let!(:answer) { FactoryGirl.create(:answer, question: question,
+    user: FactoryGirl.create(:user), judge_choice: true) }
 
   before do
     login_as(user)
