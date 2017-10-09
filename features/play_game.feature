@@ -44,9 +44,16 @@ Scenario: Players can play a complete round
   And I am on the game page
   When I sign in as "user1@example.com/topsecret"
   Then I should see "Indeed no one can pass."
-  And I press "0_submit_button"
+  And I press "1_submit_button"
   Given I am in user2 browser
   Then I should see "Judge made his choice"
   When I press "Next Round"
   Then I should be on the game page
   And I should see "Game Round: 2"
+  And I should see "Congratulations!"
+  And I should see "Score: 1"
+  Given I am in user3 browser
+  And I am on the game page
+  When I press "Next Round"
+  Then I should see "Sorry!"
+  And I should see "Score: -1"
