@@ -1,48 +1,16 @@
 
 <!-- Whiteboard sample -->
 <div id="pairs">
-  <div id="pair_1" class="pair">
-    <p id="question_1" class="question">
-      Aenean bibendum posuere est ut posuere?
-    </p>
-    <p id="answer_1" class="answer">
-      Duis et elementum elit.
-    </p>
-  </div>
-
-  <div id="pair_2" class="pair">
-    <p id="question_2" class="question">
-      Aenean bibendum posuere est ut posuere?
-    </p>
-    <p id="answer_2" class="answer">
-      Duis et elementum elit.
-    </p>
-  </div>
-
-  <div id="pair_3" class="pair">
-    <p id="question_3" class="question">
-      Aenean bibendum posuere est ut posuere?
-    </p>
-    <p id="answer_3" class="answer">
-      Duis et elementum elit.
-    </p>
-  </div>
-
-  <div id="pair_4" class="pair">
-    <p id="question_4" class="question">
-      Aenean bibendum posuere est ut posuere?
-    </p>
-    <p id="answer_4" class="answer">
-      Duis et elementum elit.
-    </p>
-  </div>
-
-  <div id="pair_5" class="pair">
-    <p id="question_5" class="question">
-      Aenean bibendum posuere est ut posuere?
-    </p>
-    <p id="answer_5" class="answer">
-      Duis et elementum elit.
-    </p>
-  </div>
+  <% if game.past_questions(round).any? %>
+    <% game.past_questions(round).each_with_index do |question, index| %>
+      <div id="pair_<%= index %>" class="pair">
+        <p id="question_<%= index %>" class="question">
+          <%= render question %>
+        </p>
+        <p id="answer_<%= index %>" class="answer">
+          <%= render question.answers.find_by(judge_choice: true) %>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
 </div>
