@@ -16,7 +16,7 @@ RSpec.describe Answer, type: :model do
     expect(@answer1.judge_choice?).to eq false
     expect(@answer2.judge_choice?).to eq true
 
-    @answer1.make_judge_identified!
+    @answer1.make_judge_choice!
     @answer2.reload
 
     expect(@answer1.judge_choice?).to eq true
@@ -24,7 +24,7 @@ RSpec.describe Answer, type: :model do
   end
 
   it 'return the judge chosen answer for a particular question' do
-    judge_choice = Answer.judge_identified_answer_for question
+    judge_choice = Answer.judge_choice_for question
     expect(judge_choice.content).to eq "I did't eat yesterday"
   end
 end

@@ -1,15 +1,13 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_game
-  before_action :set_game_player
-  before_action :set_document, except: [:judge]
-  before_action :set_current_qa
+  before_action :set_game_data
 
   def show
     authorize @game
     @question ||= Question.new
     @answer = Answer.new
-    @is_end = round_end?
+    @is_end = @game.round_end_for? current_user
   end
 
   def update
@@ -47,22 +45,14 @@ class GamesController < ApplicationController
       @game = Game.find(params[:id])
     end
 
-    def set_game_player
+    def set_game_data
       @game_player = @game.game_players.find_by(user: current_user)
-    end
 
-    def set_document
-      unless @game_player.role == "guesser"
+      unless @game_player.try(:role) == "guesser"
         @document = @game.document
       end
-    end
 
-    def set_current_qa
-      @question = Question.find_by(game: @game, round: @game_player.round)
+      @question = Question.find_by(game: @game, round: @game_player.try(:round))
       @answers = @question.answers if @question
-    end
-
-    def round_end?
-      @answers && @answers.exists?(judge_choice: true)
     end
 end

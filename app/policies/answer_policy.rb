@@ -15,6 +15,6 @@ class AnswerPolicy < QuestionPolicy
   end
 
   def update?
-    game.has_judge?(user) && !Answer.judge_identified_answer_for(record.question)
+    game.has_judge?(user) && !Answer.judge_choice_for(record.question)
   end
 end
