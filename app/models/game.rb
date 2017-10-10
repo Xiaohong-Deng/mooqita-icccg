@@ -34,8 +34,6 @@ class Game < ApplicationRecord
     # then this round is ended, otherwise not
     if question = questions.find_by(round: player_round)
       question.answers.find_by(judge_choice: true)
-    else
-      question
     end
   end
 

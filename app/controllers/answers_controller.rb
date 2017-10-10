@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
   # if fails, it fails silently
   def update
     authorize @answer
-    if @answer.make_judge_identified!
+    if @answer.make_judge_choice!
       @game.set_next_questioner
       ActionCable.server.broadcast "game-#{@answer.question.game_id}: info", { message: "Judge made his choice", message_type: "info" }
       head :ok

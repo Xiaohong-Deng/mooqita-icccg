@@ -8,11 +8,11 @@ class Answer < ApplicationRecord
 
   after_create_commit { AnswerBroadcastJob.perform_now self }
 
-  def self.judge_identified_answer_for(question)
+  def self.judge_choice_for(question)
     find_by(question_id: question.id, judge_choice: true)
   end
 
-  def make_judge_identified!
+  def make_judge_choice!
     question.answers.update_all(judge_choice: false)
     update!(judge_choice: true)
   end

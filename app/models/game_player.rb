@@ -18,7 +18,7 @@ class GamePlayer < ApplicationRecord
   end
 
   def scored?
-    chosen_player = Answer.judge_identified_answer_for(game.questions.find_by(round: round)).user
+    chosen_player = Answer.judge_choice_for(game.questions.find_by(round: round)).user
     # if user is either reader or guesser, then he needs to be chosen to win
     # if user is judge, he can't be chosen, he needs to choose reader to win
     # if reader or guesser is not chosen, then they lose
