@@ -1,3 +1,5 @@
+[![TravisCI](https://img.shields.io/travis/Xiaohong-Deng/mooqita-icccg/master.svg?label=travis-ci)](https://travis-ci.org/Xiaohong-Deng/mooqita-icccg)
+
 # Iterative Crowdsourcing Comprehension Challenge Game
 
 This is a Rails implementation of the ICCG game based on the paper [Paritosh, P., & Marcus, G. (2016). Toward a comprehension challenge, using crowdsourcing as a tool. AI Magazine, 37(1), 23-31.][0]
