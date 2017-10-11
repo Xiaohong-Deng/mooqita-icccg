@@ -16,14 +16,14 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
     if data.message_type is "question"
-      $("#current_question").append data.message
+      $('#current_question').html data.message
       $("#new_answer").removeClass 'hidden'
     else if data.message_type is "answer"
-      $("#current_answer").append data.message
-      if $("#current_answer .current_answer").length is 2
+      $('#current_answers').append data.message
+      if $("#current_answers .current_answer").length is 2
         requestJudgeForm()
     else
-      $("#info").append data.message
+      $("#info").html data.message
       revealNextRound()
 
   setGameId: (gameId)->

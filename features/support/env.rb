@@ -17,6 +17,7 @@ require 'capybara/poltergeist'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, js_errors: false,
                                     phantomjs: Phantomjs.path,
+                                    window_size: [1920,3000],
                                     phantomjs_options: ['--ssl-protocol=tlsv1.2', '--ignore-ssl-errors=yes'])
 end
 
