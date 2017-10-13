@@ -1,4 +1,1 @@
-<%= render @answers.first %>
-<%= render 'judge_form', answer: @answers.first, order: "0" %>
-<%= render @answers.second %>
-<%= render 'judge_form', answer: @answers.second, order: "1" %>
+<%= render 'judge_forms', answers: @answers %>

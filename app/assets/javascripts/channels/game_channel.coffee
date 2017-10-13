@@ -20,7 +20,7 @@ App['game' + gameId] = App.cable.subscriptions.create {channel: "GameChannel", g
       $("#new_answer").removeClass 'hidden'
     else if data.message_type is "answer"
       $('#current_answers').append data.message
-      if $("#current_answers .current_answer").length is 2
+      if $("#current_answers .answer_content").length is 2
         requestJudgeForm()
     else
       $("#info").html data.message

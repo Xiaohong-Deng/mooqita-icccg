@@ -28,3 +28,6 @@
 
 # simplecov
 coverage
+
+#RubyMine
+.idea

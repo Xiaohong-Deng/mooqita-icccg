@@ -82,7 +82,9 @@
 <div class="panel panel-default">
   <div class="panel-body" id="current_answers" data-game=<%= @game.id %>>
     <% if @answers && @answers.any? %>
-      <%= render @answers %>
+      <div class="current_answer">
+        <%= render @answers %>
+      </div>
     <% end %>
   </div>
 </div>
@@ -102,10 +104,7 @@
 <% if policy(@game).judge? %>
   <div id="judge_form">
     <% if @answers && @answers.size == 2 && !@answers.exists?(judge_choice: true) %>
-      <% @answers.each_with_index do |answer, index| %>
-        <%= render answer %>
-        <%= render "judge_form", answer: answer, order: index.to_s %>
-      <% end %>
+      <%= render 'judge_forms', answers: @answers %>
     <% end %>
   </div>
 <% end %>
