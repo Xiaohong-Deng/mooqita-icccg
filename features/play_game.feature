@@ -28,17 +28,17 @@ Scenario: Players can play a complete round
   And I am on the game page
   When I sign in as "user2@example.com/topsecret"
   Then I should see "Questioner of this round: Yes"
-  And I fill in "question_content" with "You shall not pass!"
+  And I fill in "Your Question" with "You shall not pass!"
   And I hit "enter" in "question_content"
   Given I am in user3 browser
   And I am on the game page
   When I sign in as "user3@example.com/topsecret"
   Then I should see "You shall not pass!"
-  And I fill in "answer_content" with "Why not?"
+  And I fill in "Your Answer" with "Why not?"
   And I hit "enter" in "answer_content"
   Given I am in user2 browser
   Then I should see "Why not?"
-  And I fill in "answer_content" with "Indeed no one can pass."
+  And I fill in "Your Answer" with "Indeed no one can pass."
   And I hit "enter" in "answer_content"
   Given I am in user1 browser
   And I am on the game page

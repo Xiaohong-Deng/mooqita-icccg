@@ -1,0 +1,12 @@
+<% answers.each_with_index do |answer, index| %>
+  <ul class="actions">
+    <li>
+      <div class="current_answer">
+        <%= render answer %>
+      </div>
+    </li>
+    <li>
+      <%= render 'judge_form', answer: answer, order: index.to_s %>
+    </li>
+  </ul>
+<% end %>

@@ -3,15 +3,6 @@ class AnswersController < ApplicationController
   before_action :set_answer
   before_action :set_game
 
-#   def create
-#     answer = Answer.new(answer_params)
-#     answer.user = current_user
-#     unless answer.save
-#       flash.now[:alert] = "Answer has not been created."
-#       render 'games/show'
-#     end
-#   end
-
   # this method is called from a remote ajax call, it will not cause
   # the client page to reload, so error redirecting will not happen
   # if fails, it fails silently
@@ -40,9 +31,4 @@ class AnswersController < ApplicationController
     def set_game
       @game = @answer.question.game
     end
-
-#     def answer_params
-#       params.require(:answer).permit(:content, :question_id)
-#     end
-
 end

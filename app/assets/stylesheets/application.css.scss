@@ -24,7 +24,7 @@ header h1{
   padding-bottom: 0px;
 
   &:first-child {
-    margin-top: 50px;
+    margin-top: 40px;
     text-align: left;
   }
 }
@@ -34,9 +34,48 @@ form {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 .main-container {
-  margin-top: 200px;
+  margin-top: 50px;
+}
+
+ul.actions {
+  @extend .list-unstyled;
+  @extend .list-inline;
+}
+
+div.current_answer {
+  width: 1020px;
+}
+
+a.new, a.edit, a.delete, button.judge {
+  @extend .btn;
+
+  &:before {
+    font-family: "FontAwesome";
+    padding-right: 0.5em;
+  }
+}
+
+a.new {
+  @extend .btn-success;
+  @extend .btn-lg;
+
+  &:before {
+    @extend .fa-plus;
+  }
+}
+
+button.judge {
+  @extend .btn-primary;
+
+  &:before {
+    @extend .fa-thumbs-o-up;
+  }
+}
+
+table#attributes tr th {
+  padding-right: 30px;
 }
