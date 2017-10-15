@@ -39,9 +39,9 @@
 
   <div class="titles row">
     <% if @document %>
-    <div class="col-sm-6">
-      <h1>Document</h1>
-    </div>
+      <div class="col-sm-6">
+        <h1>Document</h1>
+      </div>
     <% end %>
 
     <div class="<%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
@@ -51,9 +51,9 @@
 
   <div id="doc-info" class="doc-info row">
     <% if @document %>
-    <div id="document" class="doc-data col-sm-6">
-      <%= render @document %>
-    </div>
+      <div id="document" class="doc-data col-sm-6">
+        <%= render @document %>
+      </div>
     <% end %>
 
     <div id="whiteboard" class="doc-data <%= 'col-sm-offset-3 ' if @document.nil? %>col-sm-6">
@@ -67,9 +67,9 @@
 <div class="panel panel-default">
   <div class="panel-body" id="current_question" data-game=<%= @game.id %>>
   <!-- could be Question.new or some question from db -->
-  <% if @question.persisted? %>
-    <%= render @question %>
-  <% end %>
+    <% if @question.persisted? %>
+      <%= render @question %>
+    <% end %>
   </div>
 </div>
 

@@ -2,6 +2,7 @@ $(document).ready ->
   submitQuestion()
   submitAnswer()
   hideJudgeForm()
+  scroll_bottom()
   return
 
 gameId = window.location.pathname.substring("games/".length + 1)
@@ -73,3 +74,6 @@ hideJudgeForm = ->
 
 revealNextRound = ->
   $('input[value="Next Round"]').removeClass 'hidden'
+
+scroll_bottom = ->
+  $('#whiteboard').scrollTop($('#whiteboard')[0].scrollHeight)
