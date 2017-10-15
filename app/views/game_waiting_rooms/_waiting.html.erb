@@ -1,8 +1,8 @@
 <div class="center status">
-  There are currently <span><%= participants_size %></span> <%= 'player'.pluralize(participants_size) %> waiting.
+  <h1>There are currently <span><%= participants_size %></span> <%= 'player'.pluralize(participants_size) %> waiting.</h1>
 </div>
 
 <div class="center">
-  <button type="button" name="button" class="btn">Invite players</button>
-  <a class="btn btn-default" href="<%= root_path %>">Leave</a>
+  <button type="button" name="button" class="btn btn-primary">Invite players</button>
+  <a class="leave-room" href="<%= root_path %>">Leave</a>
 </div>

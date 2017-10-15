@@ -50,7 +50,7 @@ div.current_answer {
   width: 1020px;
 }
 
-a.new, a.edit, a.delete, button.judge {
+a.new, a.edit, a.delete, a.leave-room, button.judge {
   @extend .btn;
 
   &:before {
@@ -65,6 +65,14 @@ a.new {
 
   &:before {
     @extend .fa-plus;
+  }
+}
+
+a.leave-room {
+  @extend .btn-danger;
+
+  &:before {
+    @extend .fa-sign-out;
   }
 }
 

@@ -3,7 +3,7 @@ require_relative "shared_examples/reader"
 require_relative "shared_examples/whiteboard"
 require_relative "shared_examples/game_attributes"
 
-RSpec.describe 'Players can play the game' do
+RSpec.feature 'Players can play the game' do
   let(:user) { FactoryGirl.create(:user) }
   let(:document) { FactoryGirl.create(:document) }
   let(:game) { FactoryGirl.create(:game, document: document) }
