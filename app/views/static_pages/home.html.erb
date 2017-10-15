@@ -3,6 +3,12 @@
   <div class="center">
     <%= link_to "New Game", games_waiting_room_path, class: "new"%>
   </div>
+  <% if current_user.games.any? %>
+    <h2 style="text-align: left; margin-bottom: 20px">Active Games</h2>
+    <% current_user.games.each do |game| %>
+      <%= render game, game_player: game.player_for(current_user) %>
+    <% end %>
+  <% end %>
 <% else %>
   <div class="center jumbotron">
     <h1>Home</h1>

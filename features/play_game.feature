@@ -1,8 +1,8 @@
-Feature: Player can play through game, enter next round
+Feature: Player can resuem old games, play through game, enter next round
 
   As a player
   So that I can interact with other players and enter next round
-  I want to input information in the round
+  I want to resume old games, input information in the round
 
 Background: Users have been created
   Given the following users exist:
@@ -21,6 +21,19 @@ Background: Users have been created
   | 1       | 1       | judge   | false      |
   | 1       | 2       | reader  | true       |
   | 1       | 3       | guesser | false      |
+
+Scenario: Players can resume old games
+  Given I am in user1 browser
+  And I am on the sign in page
+  When I sign in as "user1@example.com/topsecret"
+  Then I should see "Active Games"
+  And I should see "document: dummy title"
+  And I should see "role: judge"
+  And I should see "round: 1"
+  And I should see "score: 0"
+  And I should see "New Game"
+  When I follow "Resume"
+  Then I should be on the game page
 
 @javascript
 Scenario: Players can play a complete round

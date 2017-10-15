@@ -1,0 +1,10 @@
+<ul class="actions">
+  <li>
+    <div class="game-info">
+      document: <%= game.document.title %> | role: <%= game_player.role %> | round: <%= game_player.round %> | score: <%= game_player.score %>
+    </div>
+  </li>
+  <li>
+    <%= link_to "Resume", game, class: "resume" %>
+  </li>
+</ul>

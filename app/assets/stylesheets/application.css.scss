@@ -19,7 +19,7 @@
 @import "static_pages";
 @import "games";
 
-header h1{
+header h1 {
   position: relative;
   padding-bottom: 0px;
 
@@ -50,7 +50,7 @@ div.current_answer {
   width: 1020px;
 }
 
-a.new, a.edit, a.delete, a.leave-room, button.judge {
+a.new, a.edit, a.delete, a.leave-room, a.resume, button.judge {
   @extend .btn;
 
   &:before {
@@ -76,9 +76,17 @@ a.leave-room {
   }
 }
 
-button.judge {
+a.resume, button.judge {
   @extend .btn-primary;
+}
 
+a.resume {
+  &:before {
+    @extend .fa-sign-in;
+  }
+}
+
+button.judge {
   &:before {
     @extend .fa-thumbs-o-up;
   }
