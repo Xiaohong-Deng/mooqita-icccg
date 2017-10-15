@@ -29,12 +29,16 @@ class Game < ApplicationRecord
   end
 
   def round_end_for?(user)
-    player_round = game_players.find_by(user: user).round
+    player_round = player_for(user).round
     # if question exists and there is a answer marked true for it
     # then this round is ended, otherwise not
     if question = questions.find_by(round: player_round)
       question.answers.find_by(judge_choice: true)
     end
+  end
+
+  def player_for(user)
+    game_players.find_by(user: user)
   end
 
   def has_member?(user)
