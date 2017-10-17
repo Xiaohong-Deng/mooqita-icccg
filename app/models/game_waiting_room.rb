@@ -2,16 +2,16 @@
 class GameWaitingRoom
   attr_reader :queue
 
-  def initialize(queue: Redis::Unique::Queue.new('game_waiting_room', Redis.new(url: ActionCable.server.config.cable[:url])))
+  def initialize(queue: Set.new)
     @queue = queue
   end
 
   def add(user)
-    queue.push user.id
+    queue.add user.id
   end
 
   def remove(user)
-    queue.remove user.id
+    queue.delete user.id
   end
 
   def full?
@@ -19,7 +19,9 @@ class GameWaitingRoom
   end
 
   def users_ids
-    queue.pop_all.map(&:to_i)
+    ids = queue.to_a
+    queue.clear
+    ids
   end
 
   def participants_size

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GameWaitingRoom, type: :model do
-  let(:queue) { Redis::Unique::Queue.new('game_waiting_room_test') }
+  let(:queue) { Set.new }
   let(:game_waiting_room) { GameWaitingRoom.new(queue: queue) }
 
   (1..3).each do |n|
@@ -28,21 +28,21 @@ RSpec.describe GameWaitingRoom, type: :model do
     it "adds the user's id to the queue" do
       game_waiting_room.add(user1)
 
-      expect(queue.front).to eq '1'
+      expect(queue).to include 1
     end
 
     it 'adds another user to the same queue' do
       game_waiting_room.add(user1)
       game_waiting_room.add(user2)
 
-      expect(queue.all).to include('1', '2')
+      expect(queue).to include 1, 2
     end
 
     context 'same user added twice' do
       it 'will only add one time' do
         2.times { game_waiting_room.add(user1) }
 
-        expect(queue.all).to contain_exactly '1'
+        expect(queue.size).to eq 1
       end
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe GameWaitingRoom, type: :model do
       game_waiting_room.add(user1)
       game_waiting_room.remove(user1)
 
-      expect(queue.all).to be_empty
+      expect(queue).to be_empty
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe GameWaitingRoom, type: :model do
         game_waiting_room.add(double('User', id: n))
       end
 
-      expect(game_waiting_room.full?).to eq true
+      expect(game_waiting_room).to be_full
     end
   end
 
@@ -71,7 +71,11 @@ RSpec.describe GameWaitingRoom, type: :model do
       game_waiting_room.add(user1)
       game_waiting_room.add(user2)
 
-      expect(game_waiting_room.users_ids).to eq([1, 2])
+      ids = game_waiting_room.users_ids
+
+      expect(ids).to include 1
+      expect(ids).to include 2
+      expect(ids.size).to eq 2
     end
 
     it 'casts the ids to integer' do
@@ -86,7 +90,7 @@ RSpec.describe GameWaitingRoom, type: :model do
       game_waiting_room.add(user2)
       game_waiting_room.users_ids
 
-      expect(queue.all).to be_empty
+      expect(queue).to be_empty
     end
   end
 
