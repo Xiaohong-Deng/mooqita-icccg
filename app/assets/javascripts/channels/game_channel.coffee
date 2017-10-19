@@ -15,7 +15,9 @@ window.startGameCable = ->
         $("#new_answer").removeClass 'hidden'
       else if data.message_type is "answer"
         $('#current_answers').append data.message
-        if $("#current_answers .answer_content").length is 2
+        if $('#current_answers .answer_content').length is 1
+          $('#current_answers').append "<div class='answer_warning'>Waiting the other answer to be submitted...</div>"
+        else if $("#current_answers .answer_content").length is 2
           requestJudgeForm()
       else
         $("#info").html data.message
