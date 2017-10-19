@@ -50,13 +50,14 @@ Scenario: Players can play a complete round
   And I fill in "Your Answer" with "Why not?"
   And I hit "enter" in "answer_content"
   Given I am in user2 browser
-  Then I should see "Why not?"
+  Then I should see "One answer has been submitted!"
+  And I should see "Waiting the other answer to be submitted..."
   And I fill in "Your Answer" with "Indeed no one can pass."
   And I hit "enter" in "answer_content"
   Given I am in user1 browser
   And I am on the game page
   When I sign in as "user1@example.com/topsecret"
-  Then I should see "Indeed no one can pass."
+  Then I should see "One answer has been submitted!" for "2" times
   And I press "1_submit_button"
   Given I am in user2 browser
   Then I should see "Judge made his choice"

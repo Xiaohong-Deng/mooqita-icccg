@@ -83,7 +83,14 @@
   <div class="panel-body" id="current_answers" data-game=<%= @game.id %>>
     <% if @answers && @answers.any? %>
       <div class="current_answer">
-        <%= render @answers %>
+        <% @answers.each_with_index do |answer, index| %>
+          <% if index > 0 %>
+            <div class='answer_warning'>Waiting the other answer to be submitted...</div>
+          <% end %>
+          <div class='answer_content'>
+            One answer has been submitted!
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>

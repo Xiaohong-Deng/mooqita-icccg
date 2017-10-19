@@ -25,6 +25,10 @@ Then /^(?:|I )should see "([^"]*)"$/ do |content|
   expect(page).to have_content content
 end
 
+Then /^(?:|I )should see "([^"]*)" for "([0-9]*)" times?$/ do |content, num_of_times|
+  expect(page).to have_text content, count: num_of_times
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   expect(page).to have_current_path path_to(page_name)
 end
