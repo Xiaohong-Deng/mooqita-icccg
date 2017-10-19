@@ -41,7 +41,7 @@ end
 Capybara.javascript_driver = :chrome
 
 Capybara.configure do |config|
-  config.default_max_wait_time = 10
+  config.default_max_wait_time = 5
 end
 
 RSpec.configure do |config|
@@ -73,5 +73,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Warden::Test::Helpers, type: :feature
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.after(type: :feature) { Warden.test_reset! }
 end

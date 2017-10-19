@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     # if question exists and there is a answer marked true for it
     # then this round is ended, otherwise not
     if question = questions.find_by(round: player_round)
-      question.answers.find_by(judge_choice: true)
+      question.answers.exists?(judge_choice: true)
     end
   end
 
@@ -47,6 +47,10 @@ class Game < ApplicationRecord
 
   def has_questioner?(user)
     game_players.exists?(user_id: user, questioner: true)
+  end
+
+  def has_question_for?(round)
+    questions.exists?(round: round)
   end
 
   GAME_ROLES.each do |role|

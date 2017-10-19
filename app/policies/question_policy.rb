@@ -7,6 +7,6 @@ class QuestionPolicy < ApplicationPolicy
 
   def create?
     record.game.has_questioner?(user) &&
-      Question.find_by(game: record.game, round: record.game.game_players.find_by(user: user).round).nil?
+      !record.game.has_question_for?(record.game.game_players.find_by(user: user).round)
   end
 end
