@@ -19,10 +19,6 @@ class AnswersController < ApplicationController
     end
   end
 
-  def pundit_user
-    GameChannelContext.new(current_user, @game)
-  end
-
   private
     def set_answer
       @answer = Answer.find(params[:id])
