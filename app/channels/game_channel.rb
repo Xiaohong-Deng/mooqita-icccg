@@ -22,14 +22,16 @@ class GameChannel < ApplicationCable::Channel
     content = payload_pair[1]
     # it checks the number of questions or answers created in this round
     # if questions more than 0 or answers more than 1 for a user, reject
-    authorize model_name, :create?
-    model_name.create model_params(model_name, content)
+    model_instance = model_name.new model_params(model_name, content)
+    authorize model_instance, :create?
+    unless model_instance.save
+      ActionCable.server.broadcast "game-#{@answer.question.game_id}: info",
+        { message: "#{model_name.to_s} has not been submitted.", message_type: "info" }
+      # do something to show text area again? coffee should be the one to do it
+    end
   end
   # in order to use extra parameter '@game' in pundit
   # create a wrapper called 'GameChannelContext'
-  def pundit_user
-    GameChannelContext.new(current_user, @game)
-  end
 
   private
     def set_game_and_player

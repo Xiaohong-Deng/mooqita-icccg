@@ -6,11 +6,11 @@ class AnswerBroadcastJob < ApplicationJob
   end
 
   private
-    def render_message(answer)
-      ApplicationController.renderer.render(partial: 'answers/answer', locals: { answer: answer })
-    end
+    # def render_message(answer)
+      # ApplicationController.renderer.render(partial: 'answers/answer', locals: { answer: answer })
+    # end
 
     def answer_submitted
-      "<div class='answer_content'>One answer has been submitted!</div>"
+      "<div class='answer_content'>One answer has been submitted.</div>"
     end
 end

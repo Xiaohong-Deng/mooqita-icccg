@@ -6,15 +6,12 @@ class AnswerPolicy < QuestionPolicy
   end
 
   def create?
-    if game_player = game.game_players.find_by(user: user)
-      question = Question.find_by(game: game, round: game_player.round)
-      question && !game.has_judge?(user) && question.answers.find_by(user: user).nil?
-    else
-      false
-    end
+    # if question exists, and game has member user, and user is not judge, and user hasn't submitted an answer
+    record.question && record.question.game.has_member?(user) &&
+      !record.question.game.has_judge?(user) && record.question.answers.find_by(user: user).nil?
   end
 
   def update?
-    game.has_judge?(user) && !Answer.judge_choice_for(record.question)
+    record.question.game.has_judge?(user) && !Answer.judge_choice_for(record.question)
   end
 end
