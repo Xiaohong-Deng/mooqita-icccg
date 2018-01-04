@@ -29,5 +29,8 @@
 # simplecov
 coverage
 
-#RubyMine
+# RubyMine
 .idea
+
+# gem install path
+/vendor/ruby

@@ -204,7 +204,7 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redis (3.3.3)
+    redis (3.3.5)
     redis-unique-queue (1.0.3)
       redis
     responders (2.4.0)
@@ -332,4 +332,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
