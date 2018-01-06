@@ -52,7 +52,7 @@ bundle exec rspec
 bundle exec cucumber
 ```
 
-If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file.
+If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file. What you need to do is add `add_filter "FOLDER_OR_FILE_TO_IGNORE"` to the block in `./.simplecov`. We have already done it for you if you choose `vendor` as the gem install directory.
  
 ### Run Project Locally in Development Environment
 
@@ -60,7 +60,7 @@ If you install ruby gems inside the project directory you might want to skip the
 bundle exec rails s
 ```
 
-then enter `localhost:3000` to your web browser.
+then go to `localhost:3000` in your web browser.
  
 ## Project Set Up with Virtual Machine
 
