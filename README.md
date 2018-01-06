@@ -1,4 +1,6 @@
 [![TravisCI](https://img.shields.io/travis/Xiaohong-Deng/mooqita-icccg/master.svg?label=travis-ci)](https://travis-ci.org/Xiaohong-Deng/mooqita-icccg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/98c92695841525444efa/maintainability)](https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/maintainability)
+<a href="https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/test_coverage"><img src="https://api.codeclimate.com/v1/badges/98c92695841525444efa/test_coverage" /></a>
 
 # Iterative Crowdsourcing Comprehension Challenge Game
 
@@ -16,7 +18,7 @@ Note to install `postgresql`. This is the database this project uses in developm
 
 ### Install Gems
 
-to avoid polluting your default gemset you can either `bundle install --path vendor` or use `gemset` functionality that `rvm` or `rbenv` provides.
+To avoid polluting your default gemset you can either `bundle install --path vendor` or use `gemset` functionality that `rvm` or `rbenv` provides. Add `vendor/ruby` to `.gitignore` if you choose the former. You can choose other directories inside your project directory if you like.
 
 ### Set Up Database
 
@@ -25,7 +27,7 @@ bundle exec rails db:create
 bundle exec rails db:migrate
 bundle exec rails db:seed
 ```
-if gems are installed to system default path `bundle exec` can be removed
+If gems are installed to system default path `bundle exec` can be omitted.
 
 ### Install Redis, Yarn and Javascript Dependencies
 
@@ -35,9 +37,9 @@ brew install yarn
 bundle exec rails yarn:install
 ```
 
-for Mac user remember `brew services start redis`
+For Mac user remember `brew services start redis`
 
-if `rails yarn:install` complains about node version, one way is to do the following
+If `rails yarn:install` complains about node version, one way is to do the following
 
 ```
 brew install nvm
