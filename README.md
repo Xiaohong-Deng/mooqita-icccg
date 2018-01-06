@@ -18,7 +18,7 @@ Note to install `postgresql`. This is the database this project uses in developm
 
 ### Install Gems
 
-To avoid polluting your default gemset you can either `bundle install --path vendor` or use `gemset` functionality that `rvm` or `rbenv` provides. Add `vendor/ruby` to `.gitignore` if you choose the former. You can choose other directories inside your project directory if you like.
+To avoid polluting your default gemset you can either `bundle install --path vendor` or use `gemset` functionality that `rvm` or `rbenv` provides. Add `vendor/ruby` to `.gitignore` if you choose the former. You can choose other directories inside your project root path to install required gems if you like.
 
 ### Set Up Database
 
