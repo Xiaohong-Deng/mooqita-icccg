@@ -5,10 +5,66 @@
 This is a Rails implementation of the ICCG game based on the paper [Paritosh, P., & Marcus, G. (2016). Toward a comprehension challenge, using crowdsourcing as a tool. AI Magazine, 37(1), 23-31.][0]
 
 
-## Project Set Up
+## Project Set Up with Physical Machine (Recommended)
+Note the ruby and node.js versions in this project are locked to 2.4.1 and 6.12.1. If you choose to use `gemset` with `rvm` or `rbenv` the gemset name is locked to **iccg**. You are welcomed to try the versions you want at your own risk.
 
-To ease up the start of the development process, you can use the the project's
-virtual development environment based on Vagrant.
+### Set Up Rails Environment
+
+If you haven't already, please set up your Ruby on Rails development environment. Here is a good reference link [https://gorails.com/setup/ubuntu/16.04](https://gorails.com/setup/ubuntu/16.04)
+
+Note to install `postgresql`. This is the database this project uses in development and production environment.
+
+### Install Gems
+
+to avoid polluting your default gemset you can either `bundle install --path vendor` or use `gemset` functionality that `rvm` or `rbenv` provides.
+
+### Set Up Database
+
+```
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec rails db:seed
+```
+if gems are installed to system default path `bundle exec` can be removed
+
+### Install Redis, Yarn and Javascript Dependencies
+
+```
+brew install redis
+brew install yarn
+bundle exec rails yarn:install
+```
+
+for Mac user remember `brew services start redis`
+
+if `rails yarn:install` complains about node version, one way is to do the following
+
+```
+brew install nvm
+nvm install VERSION_NUMBER
+```
+nvm is node.js version manager that allows you to install multiple versions of node.js
+
+### Run Tests
+
+```
+bundle exec rspec
+bundle exec cucumber
+```
+
+If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file.
+ 
+### Run Project Locally in Development Environment
+
+```
+bundle exec rails s
+```
+
+then enter `localhost:3000` to your web browser.
+ 
+## Project Set Up with Virtual Machine
+
+To ease up the start of the development process, you can use the the project's virtual development environment based on Vagrant.
 
 ### First Run Usage
 
@@ -22,8 +78,7 @@ virtual development environment based on Vagrant.
 7. Build the database structure with `rails db:schema:load`.
 8. Load seed data with `rails db:seed`.
 
-Now check that everything works with `rails s` and opening http://localhost:3000
-in your browser.
+Now check that everything works with `rails s` and opening http://localhost:3000 in your browser.
 
 ### Software Requirements
 
@@ -51,28 +106,9 @@ work on new features and fixes:
 * Try to add TDD and/or BDD tests for your code.
 * On finish, send a push request targeting the **master** branch for review.
 
-
 ## Testing
 
-This project relies on Rspec and Capybara. You can run the projects tests with
-the `rake spec` command.
-
-to avoid pollute your default gemset
-`bundle install --path vendor`
-```
-bundle exec rails db:create
-bundle exec rails db:migrate
-bundle exec rails db:seed
-```
-if gems are install to default path bundle exec can be removed
-
-```
-brew install redis
-brew install yarn
-bundle exec rails yarn:install
-```
-
-for mac user remember `brew services start redis`
+This project relies on Rspec, Cucumber and Capybara. Javascript unit testing has not been provided yet.
 
 ---
 [0]: https://www.aaai.org/ojs/index.php/aimagazine/article/view/2649

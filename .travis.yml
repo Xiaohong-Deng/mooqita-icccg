@@ -1,6 +1,7 @@
 language: ruby
 rvm:
 - 2.4.1
+language: node_js
 notifications:
   email: false
 sudo: false
@@ -21,6 +22,7 @@ before_install:
   -C $PWD/travis_phantomjs; fi
 - phantomjs --version
 before_script:
+- bundle install
 - bundle exec rake yarn:install
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
