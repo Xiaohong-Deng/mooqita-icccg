@@ -2,8 +2,6 @@ env:
   global:
     - CC_TEST_REPORTER_ID=0b4943cc3a212e0c4ef7c61e0f5f5800966f0025675e40fadda460cde24e7855
 language: ruby
-rvm:
-- 2.4.1
 language: node_js
 notifications:
   email: false

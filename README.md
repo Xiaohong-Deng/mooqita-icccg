@@ -1,18 +1,19 @@
-[![TravisCI](https://img.shields.io/travis/Xiaohong-Deng/mooqita-icccg/master.svg?label=travis-ci)](https://travis-ci.org/Xiaohong-Deng/mooqita-icccg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/98c92695841525444efa/maintainability)](https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/maintainability)
-<a href="https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/test_coverage"><img src="https://api.codeclimate.com/v1/badges/98c92695841525444efa/test_coverage" /></a>
+[![TravisCI](https://img.shields.io/travis/Xiaohong-Deng/mooqita-icccg/master.svg?label=travis-ci)][3]
+[![Maintainability](https://api.codeclimate.com/v1/badges/98c92695841525444efa/maintainability)][4]
+[![Test Coverage](https://api.codeclimate.com/v1/badges/98c92695841525444efa/test_coverage)][5]
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/Xiaohong-Deng/mooqita-icccg.svg?columns=all)][6]
 
 # Iterative Crowdsourcing Comprehension Challenge Game
 
 This is a Rails implementation of the ICCG game based on the paper [Paritosh, P., & Marcus, G. (2016). Toward a comprehension challenge, using crowdsourcing as a tool. AI Magazine, 37(1), 23-31.][0]
 
 
-## Project Set Up with Physical Machine (Recommended)
+## Project Setup with Physical Machine (Recommended)
 Note the ruby and node.js versions in this project are locked to 2.4.1 and 6.12.1. If you choose to use `gemset` with `rvm` or `rbenv` the gemset name is locked to **iccg**. You are welcomed to try the versions you want at your own risk.
 
 ### Set Up Rails Environment
 
-If you haven't already, please set up your Ruby on Rails development environment. Here is a good reference link [https://gorails.com/setup/ubuntu/16.04](https://gorails.com/setup/ubuntu/16.04)
+If you haven't already, please set up your Ruby on Rails development environment. Here is a good reference link [Setup Ruby on Rails][7]
 
 Note to install `postgresql`. This is the database this project uses in development and production environment.
 
@@ -54,7 +55,7 @@ bundle exec rspec
 bundle exec cucumber
 ```
 
-If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file. What you need to do is add `add_filter "FOLDER_OR_FILE_TO_IGNORE"` to the block in `./.simplecov`. We have already done it for you if you choose `vendor` as the gem install directory.
+If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file. You need to add `add_filter "FOLDER_OR_FILE_TO_IGNORE"` to the block in `./.simplecov`. We have done it for you if you choose `vendor` as the gem install directory.
  
 ### Run Project Locally in Development Environment
 
@@ -64,7 +65,7 @@ bundle exec rails s
 
 then go to `localhost:3000` in your web browser.
  
-## Project Set Up with Virtual Machine
+## Project Setup with Virtual Machine
 
 To ease up the start of the development process, you can use the the project's virtual development environment based on Vagrant.
 
@@ -112,7 +113,42 @@ work on new features and fixes:
 
 This project relies on Rspec, Cucumber and Capybara. Javascript unit testing has not been provided yet.
 
+## Deployment
+
+### Manually Deploy to Heroku
+First set up Heroku account and [Heroku CLI][8]. Then in terminal, login, add SSH keys, and create your app.
+```
+heroku login
+heroku keys:add
+heroku create PROJECT_NAME
+heroku addons:add redistogo
+```
+Before push to heroku, set up your consumer configuration. First run `heroku config:set RAILS_HOST=YOUR_APP_URL`. In `./config/environments/production.rb` do the following
+```ruby
+config.action_cable.url="wss://#{ENV['RAILS_HOST']}/cable"
+config.web_socket_server_url="wss://#{ENV['RAILS_HOST']}/cable"
+config.action_cable.allowed_request_origins = [
+'127.0.0.1',
+/(http|https):\/\/#{ENV['RAILS_HOST']}.*/
+]
+```
+Then push to heroku and initialize the database.
+```
+git push heroku master
+heroku run rails db:migrate
+heroku run rails db:seed
+```
+Try to visit `PROJECT_NAME.herokuapp.com` to see if everything works.
+### Automatically Deployment through CI Services
+Please refer to the documentation from the service provider of your choice.
+
 ---
 [0]: https://www.aaai.org/ojs/index.php/aimagazine/article/view/2649
 [1]: https://www.vagrantup.com/downloads.html
 [2]: https://www.virtualbox.org/wiki/Downloads
+[3]: https://travis-ci.org/Xiaohong-Deng/mooqita-icccg
+[4]: https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/maintainability
+[5]: https://codeclimate.com/github/Xiaohong-Deng/mooqita-icccg/test_coverage
+[6]: https://waffle.io/Xiaohong-Deng/mooqita-icccg
+[7]: https://gorails.com/setup/ubuntu/16.04
+[8]: https://devcenter.heroku.com/articles/heroku-cli
