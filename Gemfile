@@ -50,6 +50,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'pry-rails'
+  gem 'jasmine', '~> 2.9.0'
+  gem 'teaspoon-jasmine'
 end
 
 group :test do
