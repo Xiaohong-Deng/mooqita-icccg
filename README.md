@@ -1,9 +1,9 @@
+# Iterative Crowdsourcing Comprehension Challenge Game
+
 [![TravisCI](https://img.shields.io/travis/Xiaohong-Deng/mooqita-icccg/master.svg?label=travis-ci)][3]
 [![Maintainability](https://api.codeclimate.com/v1/badges/98c92695841525444efa/maintainability)][4]
 [![Test Coverage](https://api.codeclimate.com/v1/badges/98c92695841525444efa/test_coverage)][5]
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/Xiaohong-Deng/mooqita-icccg.svg?columns=all)][6]
-
-# Iterative Crowdsourcing Comprehension Challenge Game
 
 This is a Rails implementation of the ICCG game based on the paper [Paritosh, P., & Marcus, G. (2016). Toward a comprehension challenge, using crowdsourcing as a tool. AI Magazine, 37(1), 23-31.][0]
 
@@ -53,6 +53,7 @@ nvm is node.js version manager that allows you to install multiple versions of n
 ```
 bundle exec rspec
 bundle exec cucumber
+bundle exec rails teaspoon
 ```
 
 If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file. You need to add `add_filter "FOLDER_OR_FILE_TO_IGNORE"` to the block in `./.simplecov`. We have done it for you if you choose `vendor` as the gem install directory.
@@ -111,7 +112,10 @@ work on new features and fixes:
 
 ## Testing
 
-This project relies on Rspec, Cucumber and Capybara. Javascript unit testing has not been provided yet.
+This project relies on RSpec, Cucumber, Jasmine and Capybara.
+
+### Test Coverage Report
+[Teaspoon][9] is a JavaScript test runner with various perks. It can generate javascript coverage report. [SimpleCov][10] generates ruby coverage report automatically after running RSpec and Cucumber. Generated reports go into `./coverage`
 
 ## Deployment
 
@@ -139,7 +143,7 @@ heroku run rails db:migrate
 heroku run rails db:seed
 ```
 Try to visit `PROJECT_NAME.herokuapp.com` to see if everything works.
-### Automatically Deployment through CI Services
+### Automatic Deployment through CI Services
 Please refer to the documentation from the service provider of your choice.
 
 ---
@@ -152,3 +156,5 @@ Please refer to the documentation from the service provider of your choice.
 [6]: https://waffle.io/Xiaohong-Deng/mooqita-icccg
 [7]: https://gorails.com/setup/ubuntu/16.04
 [8]: https://devcenter.heroku.com/articles/heroku-cli
+[9]: https://github.com/jejacks0n/teaspoon
+[10]: https://github.com/colszowka/simplecov
