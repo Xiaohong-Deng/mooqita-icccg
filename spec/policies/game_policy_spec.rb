@@ -5,9 +5,9 @@ RSpec.describe GamePolicy do
   context 'permissions' do
     subject { GamePolicy.new(user, game) }
 
-    let(:user) { FactoryGirl.create(:user) }
-    let(:document) { FactoryGirl.create(:document) }
-    let(:game) { FactoryGirl.create(:game, document: document) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:document) { FactoryBot.create(:document) }
+    let(:game) { FactoryBot.create(:game, document: document) }
 
     context 'for anonymous users' do
       let(:user) { nil }
@@ -99,7 +99,7 @@ RSpec.describe GamePolicy do
     end
 
     context 'for judges of other games' do
-      before { assign_role!(user, :judge, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :judge, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :show }
       it { should_not permit_action :update }
@@ -110,7 +110,7 @@ RSpec.describe GamePolicy do
     end
 
     context 'for readers of other games' do
-      before { assign_role!(user, :reader, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :reader, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :show }
       it { should_not permit_action :update }
@@ -121,7 +121,7 @@ RSpec.describe GamePolicy do
     end
 
     context 'for guessers of other games' do
-      before { assign_role!(user, :guesser, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :guesser, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :show }
       it { should_not permit_action :update }

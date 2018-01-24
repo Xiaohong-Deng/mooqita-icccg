@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-  let(:user1) { FactoryGirl.create(:user) }
-  let(:user2) { FactoryGirl.create(:user) }
-  let(:document) { FactoryGirl.create(:document) }
-  let(:game) { FactoryGirl.create(:game, document: document) }
-  let(:question) { FactoryGirl.create(:question, game: game, user: user1) }
+  let(:user1) { FactoryBot.create(:user) }
+  let(:user2) { FactoryBot.create(:user) }
+  let(:document) { FactoryBot.create(:document) }
+  let(:game) { FactoryBot.create(:game, document: document) }
+  let(:question) { FactoryBot.create(:question, game: game, user: user1) }
 
   before do
     @answer1 = Answer.create(content: "I ate yesterday", user: user1, question: question)

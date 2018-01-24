@@ -53,7 +53,7 @@ nvm is node.js version manager that allows you to install multiple versions of n
 ```
 bundle exec rspec
 bundle exec cucumber
-bundle exec rails teaspoon
+bundle exec teaspoon
 ```
 
 If you install ruby gems inside the project directory you might want to skip the folder such that `simplecov` does not generate a large report file. You need to add `add_filter "FOLDER_OR_FILE_TO_IGNORE"` to the block in `./.simplecov`. We have done it for you if you choose `vendor` as the gem install directory.

@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe GamesController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:document) { FactoryGirl.create(:document) }
-  let(:game) { FactoryGirl.create(:game, document: document) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:document) { FactoryBot.create(:document) }
+  let(:game) { FactoryBot.create(:game, document: document) }
 
   before do
     sign_in user

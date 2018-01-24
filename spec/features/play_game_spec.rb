@@ -4,12 +4,12 @@ require_relative "shared_examples/whiteboard"
 require_relative "shared_examples/game_attributes"
 
 RSpec.feature 'Players can play the game' do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:document) { FactoryGirl.create(:document) }
-  let(:game) { FactoryGirl.create(:game, document: document) }
-  let!(:question) { FactoryGirl.create(:question, game: game, user: FactoryGirl.create(:user)) }
-  let!(:answer) { FactoryGirl.create(:answer, question: question,
-    user: FactoryGirl.create(:user), judge_choice: true) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:document) { FactoryBot.create(:document) }
+  let(:game) { FactoryBot.create(:game, document: document) }
+  let!(:question) { FactoryBot.create(:question, game: game, user: FactoryBot.create(:user)) }
+  let!(:answer) { FactoryBot.create(:answer, question: question,
+    user: FactoryBot.create(:user), judge_choice: true) }
 
   before do
     login_as(user)
