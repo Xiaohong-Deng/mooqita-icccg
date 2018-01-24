@@ -67,7 +67,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    crass (1.0.2)
+    crass (1.0.3)
     cucumber (2.4.0)
       builder (>= 2.1.2)
       cucumber-core (~> 1.5.0)
@@ -98,10 +98,10 @@ GEM
     docile (1.1.5)
     erubi (1.7.0)
     execjs (2.7.0)
-    factory_girl (4.8.0)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
@@ -124,13 +124,8 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    i18n (0.8.6)
-    jasmine (2.9.0)
-      jasmine-core (>= 2.9.0, < 3.0.0)
-      phantomjs
-      rack (>= 1.2.1)
-      rake
-    jasmine-core (2.9.1)
+    i18n (0.9.3)
+      concurrent-ruby (~> 1.0)
     json (2.1.0)
     kramdown (1.12.0)
     listen (3.1.5)
@@ -148,7 +143,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.3.0)
-    minitest (5.10.3)
+    minitest (5.11.1)
     multi_json (1.12.1)
     multi_test (0.1.2)
     nenv (0.3.0)
@@ -206,13 +201,11 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (12.1.0)
+    rake (12.3.0)
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redis (3.3.5)
-    redis-unique-queue (1.0.3)
-      redis
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -278,7 +271,7 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
@@ -312,10 +305,9 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   devise
-  factory_girl_rails
+  factory_bot_rails
   font-awesome-rails
   guard-rspec
-  jasmine (~> 2.9.0)
   kramdown (~> 1.12.0)
   listen (>= 3.0.5, < 3.2)
   pg
@@ -327,7 +319,6 @@ DEPENDENCIES
   rails (~> 5.1.0)
   rails_12factor
   redis (~> 3.0)
-  redis-unique-queue (~> 1.0.3)
   rspec-rails
   sass-rails (~> 5.0)
   simple_form

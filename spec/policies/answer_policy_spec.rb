@@ -4,11 +4,11 @@ RSpec.describe AnswerPolicy do
   context 'permissions' do
     subject { AnswerPolicy.new(user, answer) }
 
-    let(:user) { FactoryGirl.create(:user) }
-    let(:document) { FactoryGirl.create(:document) }
-    let(:game) { FactoryGirl.create(:game, document: document) }
-    let(:question) { FactoryGirl.create(:question, game: game, user: FactoryGirl.create(:user), round: ROUND) }
-    let(:answer) { FactoryGirl.create(:answer, question: question, user: FactoryGirl.create(:user)) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:document) { FactoryBot.create(:document) }
+    let(:game) { FactoryBot.create(:game, document: document) }
+    let(:question) { FactoryBot.create(:question, game: game, user: FactoryBot.create(:user), round: ROUND) }
+    let(:answer) { FactoryBot.create(:answer, question: question, user: FactoryBot.create(:user)) }
 
     context 'for anonymous users' do
       let(:user) { nil }
@@ -27,8 +27,8 @@ RSpec.describe AnswerPolicy do
       end
 
       context 'when answer is chosen' do
-        let(:answer) { FactoryGirl.create(:answer, question: question,
-          user: FactoryGirl.create(:user), judge_choice: true) }
+        let(:answer) { FactoryBot.create(:answer, question: question,
+          user: FactoryBot.create(:user), judge_choice: true) }
 
         it { should_not permit_action :update }
       end
@@ -44,7 +44,7 @@ RSpec.describe AnswerPolicy do
       end
 
       context "when player's answer is raised" do
-        let(:answer) { FactoryGirl.create(:answer, question: question, user: user) }
+        let(:answer) { FactoryBot.create(:answer, question: question, user: user) }
 
         it { should_not permit_action :create }
       end
@@ -60,28 +60,28 @@ RSpec.describe AnswerPolicy do
       end
 
       context "when player's answer is raised" do
-        let(:answer) { FactoryGirl.create(:answer, question: question, user: user) }
+        let(:answer) { FactoryBot.create(:answer, question: question, user: user) }
 
         it { should_not permit_action :create }
       end
     end
 
     context 'for judges of other games' do
-      before { assign_role!(user, :judge, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :judge, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :create }
       it { should_not permit_action :update }
     end
 
     context 'for readers of other games' do
-      before { assign_role!(user, :reader, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :reader, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :create }
       it { should_not permit_action :update }
     end
 
     context 'for guessers of other games' do
-      before { assign_role!(user, :guesser, FactoryGirl.create(:game, document: document)) }
+      before { assign_role!(user, :guesser, FactoryBot.create(:game, document: document)) }
 
       it { should_not permit_action :create }
       it { should_not permit_action :update }
