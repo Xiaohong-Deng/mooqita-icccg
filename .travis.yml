@@ -44,6 +44,8 @@ deploy:
   provider: heroku
   api_key:
     secure: CRr1dTBcycaENs91dx/a4jqJkMo5p32ZA7M7sp5WsKvF+KJM4kkzYR2MnfOubJxni3NL4swu5zaZueZGezSfzndJpDD9N+ug4AcWAPpv7T4BkZn8Zr67e7rYgby1bQ1C16Vl45kdLNfR9SCjhoxuDKYlAmgWaxLrlTFjOcRZTRhoB5CQ8nmkCJxgCFaZWxv5c8qrwPkgzvxerNas1nnsQUP15R0FHFjtHiaDYBt7m7L3+FC00lnZJfZ/En5bFKGe7uku/WyDfs9ORRPN+RIQL/riWeHW6mP05o4bOWmK9Gk+cexfknvYQ/hxrZIQUOmqmoc95KMYBLwnD4fod9z29zqFCTN4Ad2aqHwpIAZKyx8AQFIxavGaKAR8wPZMBKQSDtA5RTaie8qGRexzZyCu1k/glf6s6OtM72Jt2EJGPvsZKy37QufOgvDbVVyqvVV9XICLILtobpuSZrPGKxVTAmYHMkK04zMjeIaN2Sy3zgMhENPgh86bJ+2i6DvTLpnA9W6r8NfMWofpC34TusATc6CsQVc0tjKepelpcS9VrYqRF+pmen2/9EUw69Iso+z6sTe2722pTqmla3ip41DlLIvsA6qABMDlMbYOMenEDo0HuD7Xi4yZl/JDYt/OPpueQvdWJ4yi3HraA/x2eXkiNhN8ootwVApIXN7jEqCTm18=
-  app: iccg-team-green
+  app:
+    develop: iccg-green-dev
+    master: iccg-team-green
   on:
     repo: Xiaohong-Deng/mooqita-icccg
