@@ -9,7 +9,7 @@ This is a Rails implementation of the ICCG game based on the paper [Paritosh, P.
 
 
 ## Project Setup with Physical Machine (Recommended)
-Note the ruby and node.js versions in this project are locked to 2.4.1 and 6.11.1. If you choose to use `gemset` with `rvm` or `rbenv` the gemset name is locked to **iccg**. You are welcomed to try the versions you want at your own risk.
+Note the ruby and node.js versions in this project are locked to 2.4.1 and 8.10.0. If you choose to use `gemset` with `rvm` or `rbenv` the gemset name is locked to **iccg**. You are welcomed to try the versions you want at your own risk.
 
 ### Set Up Rails Environment
 
