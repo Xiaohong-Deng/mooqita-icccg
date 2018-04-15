@@ -8,10 +8,6 @@ module ApplicationHelper
     end
   end
 
-  def logged_in?
-    !current_user.nil?
-  end
-
   def flash_class(level)
     case level
     when 'notice' then "alert alert-success"

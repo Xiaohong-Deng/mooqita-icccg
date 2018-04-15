@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  let(:document) { FactoryGirl.create(:document) }
+  let(:document) { FactoryBot.create(:document) }
   describe '.create_with_users_ids' do
     context 'ids given' do
       before do

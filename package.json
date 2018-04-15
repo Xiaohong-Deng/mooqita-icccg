@@ -2,7 +2,7 @@
   "name": "mooqita-icccg",
   "private": true,
   "engines": {
-    "node": "6.11.1"
+    "node": "8.10.0"
   },
   "dependencies": {
     "autoprefixer": "^7.1.3",

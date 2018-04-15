@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe GamePlayer, type: :model do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:document) { FactoryGirl.create(:document) }
-  let(:game) { FactoryGirl.create(:game, document: document) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:document) { FactoryBot.create(:document) }
+  let(:game) { FactoryBot.create(:game, document: document) }
 
   it 'should be able to set its questioner' do
     game_player = GamePlayer.create(game: game, user: user)

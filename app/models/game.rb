@@ -5,7 +5,8 @@ class Game < ApplicationRecord
   belongs_to :document
 
   enum status: [:active, :paused]
-
+  # delegate set_next_questioner to the return value of next_questioner
+  # which is a GamePlayer, next_questioner is reset once judge makes his choice
   delegate :set_next_questioner, to: :next_questioner
 
   def self.create_with_users_ids(ids)
