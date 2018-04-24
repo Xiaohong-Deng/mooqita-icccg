@@ -1,30 +1,6 @@
 <div id="game_attr row">
-  <table id="attributes">
-      <tr>
-        <th>Game Round: </th>
-        <td><%= @game_player.round %></td>
-      </tr>
-      <tr>
-        <th>Score: </th>
-        <td><%= @game_player.score %></td>
-      </tr>
-      <tr>
-        <th>Role: </th>
-        <td><%= @game_player.role %></td>
-      </tr>
-      <% if policy(@game).show_questioner? %>
-        <tr>
-          <th>Questioner of this round: </th>
-          <td>
-            <% if @game_player.questioner? %>
-              Yes
-            <% else %>
-              No
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-  </table>
+  <%= render 'games/attributes', game_player: @game_player, game: @game %>
+
   <% if @is_end %>
     <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
   <% else %>
