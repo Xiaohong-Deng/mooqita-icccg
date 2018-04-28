@@ -35,6 +35,20 @@ Scenario: Players can resume old games
   When I follow "Resume"
   Then I should be on the game page
 
+#Scenario: Players can see other players status
+#  Given I am in user2 browser
+#  And I am on the game page
+#  When I sign in as "user2@example.com/topsecret"
+#  Then I should see user2 online
+#  And I should see user1 offline
+#  And I should see user3 offline
+#  Given I am in user3 browser
+#  And I am on the game page
+#  When I sign in as "user3@example.com/topsecret"
+#  Then I should see user2 online
+#  And I should see user3 online
+#  And I should see user1 offline
+
 @javascript
 Scenario: Players can play a complete round
   Given I am in user2 browser
