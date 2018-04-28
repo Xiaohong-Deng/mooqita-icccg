@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
     authorize @answer
     if @answer.make_judge_choice!
       @answer.question.game.set_next_questioner
-      ActionCable.server.broadcast "game-#{@answer.question.game_id}: info", { message: "Judge made his choice", message_type: "info" }
+      ActionCable.server.broadcast "game-#{@answer.question.game_id}: info", { message: choice_made, message_type: "info" }
       head :ok
     else
       # send from a remote call, so no redirect_to actually
@@ -21,5 +21,9 @@ class AnswersController < ApplicationController
   private
     def set_answer
       @answer = Answer.find(params[:id])
+    end
+
+    def choice_made
+      "Judge made the choice. <br /> Please press the Next Round button to enter the next round."
     end
 end

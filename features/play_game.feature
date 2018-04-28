@@ -60,7 +60,7 @@ Scenario: Players can play a complete round
   Then I should see "One answer has been submitted." for "2" times
   And I press "1_submit_button"
   Given I am in user2 browser
-  Then I should see "Judge made his choice"
+  Then I should see "Judge made the choice"
   When I press "Next Round"
   Then I should be on the game page
   And I should see "Game Round: 2"

@@ -69,7 +69,7 @@ window.startGameCable = ->
     )
 
   revealNextRound = ->
-    $('input[value="Next Round"]').removeClass 'hidden'
+    $('input[value="Next Round"]').prop('disabled', false)
 
   scroll_bottom = ->
     $('#whiteboard').scrollTop($('#whiteboard')[0].scrollHeight)

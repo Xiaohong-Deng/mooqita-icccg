@@ -4,7 +4,7 @@
   <% if @is_end %>
     <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary"%>
   <% else %>
-    <%= button_to "Next Round", game_path, method: :patch, class: "btn btn-lg btn-primary hidden"%>
+    <%= button_to "Next Round", game_path, method: :patch, disabled: true, class: "btn btn-lg btn-primary"%>
   <% end %>
 </div>
 
@@ -95,7 +95,9 @@
 <div class="panel panel-default">
   <div class="panel-body" id="info">
     <% if @is_end %>
-      <p>Judge has made his choice</p>
+      <p>Judge has made his choice.<br />
+        Please press the Next Round button to enter the next round.
+      </p>
     <% end %>
   </div>
 </div>
